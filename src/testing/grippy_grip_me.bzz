@@ -1,0 +1,62 @@
+# Selected these just because they seemed to work 
+# and exhibit the correct behavior
+# I never changed the hw8.argos file, so this is the only file I included.
+
+MAX_SPEED = 10.0
+MIN_SPEED = -MAX_SPEED
+
+function set_wheels_debug(Left, Right){
+	#log(id, " speeds: ", Left, " " , Right)
+	set_wheels(Left, Right)
+	#debug.print("i: ", L_increase, " ", R_increase, "; s: ", Left, " ", Right, "; a: ", AngleToGoal)
+}
+
+# This function is executed once at init time
+function init() {
+    log("Initializing the Robots")
+    math.rng.setseed(id)
+ 		gripped = 0
+    failure = 0
+    turret_enable()
+}
+
+# This function is executed at each time step
+# The main loop is controller by ARGoS
+function step() {
+    if(gripped > 0){
+			if (proximity[3].value > 0.1){
+	      set_wheels_debug(0.0, 0.0)
+	      L_wheel = 0.0
+	      R_wheel = 0.0
+     	  gripped = 1
+      	log("Object Released")
+ 	      gripper_unlock()
+        set_wheels_debug(L_wheel, R_wheel)
+    	} else {
+     	  L_wheel = -5.0
+      	R_wheel = -5.0
+        set_wheels_debug(L_wheel, R_wheel)
+    	}
+		} else {
+			log("setting gripping")
+	    set_wheels_debug(0.0, 0.0)
+	    L_wheel = 0.0
+	    R_wheel = 0.0
+ 	    gripper_lock()
+      gripped = 1
+      log("Object Gripped")
+      set_wheels_debug(L_wheel, R_wheel)
+      #turret_disable()
+    }
+   
+}
+
+# This function is executed when you press the reset button
+function reset() {
+
+}
+
+# This function is executed once when you close the simulator
+function destroy() {
+
+}
