@@ -8,6 +8,11 @@
 #include "real_kheperaiv_lidar_sensor.h"
 #include "real_kheperaiv_proximity_sensor.h"
 #include "real_kheperaiv_ultrasound_sensor.h"
+#include "real_kheperaiv_gripper_actuator.h"
+#include "real_kheperaiv_gripper_sensor.h"
+#include "real_kheperaiv_turret_actuator.h"
+#include "real_kheperaiv_turret_encoder_sensor.h"
+#include "real_kheperaiv_turret_gripper_actuator.h"
 #include <argos3/core/utility/logging/argos_log.h>
 
 /****************************************/
@@ -70,6 +75,9 @@ void CRealKheperaIV::Destroy() {
 CCI_Actuator* CRealKheperaIV::MakeActuator(const std::string& str_name) {
    MAKE_ACTUATOR(CRealKheperaIVDifferentialSteeringActuator,
                  "differential_steering");
+   // MAKE_ACTUATOR(CRealKheperaIVGripperActuator, "gripper");
+   MAKE_ACTUATOR(CRealKheperaIVGripperTurretActuator, "gripper");
+   MAKE_ACTUATOR(CRealKheperaIVTurretActuator, "turret");
    MAKE_ACTUATOR(CRealKheperaIVLEDsActuator,
                  "leds");
    return NULL;
@@ -96,6 +104,8 @@ CCI_Sensor* CRealKheperaIV::MakeSensor(const std::string& str_name) {
 	       "differential_steering");
    MAKE_SENSOR(CRealKheperaIVGroundSensor,
                "kheperaiv_ground");
+   MAKE_SENSOR(CRealKheperaIVTurretEncoderSensor,
+               "khepera_turret");
    MAKE_SENSOR(CRealKheperaIVLIDARSensor,
                "kheperaiv_lidar");
    MAKE_SENSOR(CRealKheperaIVProximitySensor,

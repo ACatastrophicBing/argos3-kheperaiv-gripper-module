@@ -29,26 +29,13 @@ namespace argos {
   /*
    * The stack must have no values
    */
-  int LuaGripperLockPositive(lua_State* pt_lua_state) {
+  int LuaGripperLock(lua_State* pt_lua_state) {
     /* Get wheel speed from stack */
     if(lua_gettop(pt_lua_state) != 0) {
-      return luaL_error(pt_lua_state, "robot.gripper.lock_positive() expects no arguments");
+      return luaL_error(pt_lua_state, "robot.gripper.lock() expects no arguments");
     }
     /* Perform action */
-    CLuaUtility::GetDeviceInstance<CCI_KheperaIVGripperActuator>(pt_lua_state, "gripper")->LockPositive();
-    return 0;
-  }
-
-  /*
-   * The stack must have no values
-   */
-  int LuaGripperLockNegative(lua_State* pt_lua_state) {
-    /* Get wheel speed from stack */
-    if(lua_gettop(pt_lua_state) != 0) {
-      return luaL_error(pt_lua_state, "robot.gripper.lock_negative() expects no arguments");
-    }
-    /* Perform action */
-    CLuaUtility::GetDeviceInstance<CCI_KheperaIVGripperActuator>(pt_lua_state, "gripper")->LockNegative();
+    CLuaUtility::GetDeviceInstance<CCI_KheperaIVGripperActuator>(pt_lua_state, "gripper")->Lock();
     return 0;
   }
 
@@ -84,16 +71,9 @@ namespace argos {
   /****************************************/
   /****************************************/
 
-  void CCI_KheperaIVGripperActuator::LockPositive() {
+  void CCI_KheperaIVGripperActuator::Lock() {
     printf("Gripper Should have locked\n");
     SetAperture(LOCKED_POSITIVE);
-  }
-
-  /****************************************/
-  /****************************************/
-
-  void CCI_KheperaIVGripperActuator::LockNegative() {
-    SetAperture(LOCKED_NEGATIVE);
   }
 
   /****************************************/
@@ -110,8 +90,7 @@ namespace argos {
   void CCI_KheperaIVGripperActuator::CreateLuaState(lua_State* pt_lua_state) {
     CLuaUtility::OpenRobotStateTable (pt_lua_state, "gripper"                               );
     CLuaUtility::AddToTable          (pt_lua_state, "_instance",     this                   );
-    CLuaUtility::AddToTable          (pt_lua_state, "lock_positive", &LuaGripperLockPositive);
-    CLuaUtility::AddToTable          (pt_lua_state, "lock_negative", &LuaGripperLockNegative);
+    CLuaUtility::AddToTable          (pt_lua_state, "lock", &LuaGripperLock);
     CLuaUtility::AddToTable          (pt_lua_state, "unlock",        &LuaGripperUnlock      );
     CLuaUtility::CloseRobotStateTable(pt_lua_state                                          );
   }

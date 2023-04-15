@@ -109,14 +109,17 @@ $ argos3 -q box
       <controller config="sync" />
     </kheperaiv>
     
-    <!--
+    
     <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
-      <body position="0.1704,0,0" orientation="0,0,0" />
+      <body position="0.1850,0,0" orientation="0,0,0" />
     </cylinder>
-    -->
-    <box id="c" size="0.1,0.1,0.1" mass="0.1" movable="true">
-      <body position="0.1304,0,0" orientation="0,0,0" />
+    
+    
+    <!--
+    <box id="c" size="0.2,0.2,0.2" mass="0.1" movable="true">
+      <body position="0.18815,0,0" orientation="0,0,0" />
     </box>
+    -->
     
     <!-- 
     <distribute>

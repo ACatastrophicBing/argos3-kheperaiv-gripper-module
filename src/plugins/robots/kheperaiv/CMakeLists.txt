@@ -51,7 +51,10 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
     real_robot/real_kheperaiv_lidar_sensor.h
     real_robot/real_kheperaiv_proximity_sensor.h
     real_robot/real_kheperaiv_ultrasound_sensor.h
-    # TODO : Make the real robot code
+    real_robot/real_kheperaiv_turret_encoder_sensor.h
+    real_robot/real_kheperaiv_turret_gripper_actuator.h
+    real_robot/real_kheperaiv_turret_actuator.h
+    # TODO : Make the real robot force sensor code
     )
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 
@@ -121,6 +124,9 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
     real_robot/real_kheperaiv_lidar_sensor.cpp
     real_robot/real_kheperaiv_proximity_sensor.cpp
     real_robot/real_kheperaiv_ultrasound_sensor.cpp
+    real_robot/real_kheperaiv_turret_encoder_sensor.cpp
+    real_robot/real_kheperaiv_turret_gripper_actuator.cpp
+    real_robot/real_kheperaiv_turret_actuator.cpp
     # TODO : Make the real robot code
     )
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")

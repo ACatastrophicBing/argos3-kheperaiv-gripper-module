@@ -547,7 +547,7 @@ void CBuzzControllerKheperaIV::SetLEDs(const CColor& c_color) {
 /****************************************/
 
 void CBuzzControllerKheperaIV::GripperLock() {
-   m_pcGripper->LockPositive();
+   m_pcGripper->Lock();
 }
 
 /****************************************/

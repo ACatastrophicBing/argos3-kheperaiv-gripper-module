@@ -65,12 +65,7 @@ namespace argos {
       /**
        * Sets gripper aperture to lock, positive direction.
        */
-      void LockPositive();
-
-      /**
-       * Sets gripper aperture to lock, negative direction.
-       */
-      void LockNegative();
+      void Lock();
 
       /**
        * Unlock gripper: objects are released.
