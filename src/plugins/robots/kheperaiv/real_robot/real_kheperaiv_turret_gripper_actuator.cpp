@@ -3,31 +3,31 @@
 /****************************************/
 /****************************************/
 
-CRealKheperaIVGripperTurretActuator::CRealKheperaIVGripperTurretActuator(){
+CRealKheperaIVTurretGripperActuator::CRealKheperaIVTurretGripperActuator(){
    /* The gripper once on is automatically initialized */
 }
    
 /****************************************/
 /****************************************/
 
-CRealKheperaIVGripperTurretActuator::~CRealKheperaIVGripperTurretActuator() {
+CRealKheperaIVTurretGripperActuator::~CRealKheperaIVTurretGripperActuator() {
 }
    
 /****************************************/
 /****************************************/
 
-void CRealKheperaIVGripperTurretActuator::Do(Real f_elapsed_time) {
+void CRealKheperaIVTurretGripperActuator::Do(Real f_elapsed_time) {
 }
 
 /****************************************/
 /****************************************/
 
-void CRealKheperaIVGripperTurretActuator::Lock(){
+void CRealKheperaIVTurretGripperActuator::Lock(){
    printf("Real robot has gripped\n");
    cgripper_Close_Gripper();
 }
 
 
-void CRealKheperaIVGripperTurretActuator::Unlock(){
+void CRealKheperaIVTurretGripperActuator::Unlock(){
    cgripper_Open_Gripper();
 }

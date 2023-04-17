@@ -76,7 +76,7 @@ CCI_Actuator* CRealKheperaIV::MakeActuator(const std::string& str_name) {
    MAKE_ACTUATOR(CRealKheperaIVDifferentialSteeringActuator,
                  "differential_steering");
    // MAKE_ACTUATOR(CRealKheperaIVGripperActuator, "gripper");
-   MAKE_ACTUATOR(CRealKheperaIVGripperTurretActuator, "gripper");
+   MAKE_ACTUATOR(CRealKheperaIVTurretGripperActuator, "gripper");
    MAKE_ACTUATOR(CRealKheperaIVTurretActuator, "turret");
    MAKE_ACTUATOR(CRealKheperaIVLEDsActuator,
                  "leds");
