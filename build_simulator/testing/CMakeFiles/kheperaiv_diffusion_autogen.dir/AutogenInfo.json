@@ -1,0 +1,86 @@
+{
+	"BUILD_DIR" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing/kheperaiv_diffusion_autogen",
+	"CMAKE_BINARY_DIR" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/src/testing",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_SOURCE_DIR" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/src",
+	"HEADERS" : 
+	[
+		[
+			"/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/src/testing/kheperaiv_diffusion.h",
+			"Mu",
+			"EWIEGA46WW/moc_kheperaiv_diffusion.cpp"
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing/kheperaiv_diffusion_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing/kheperaiv_diffusion_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"ARGOS_simulator_BUILD",
+		"GL_SILENCE_DEPRECATION",
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_WIDGETS_LIB",
+		"kheperaiv_diffusion_EXPORTS"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing",
+		"/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/src/testing",
+		"/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/src",
+		"/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator",
+		"/usr/include/Headers",
+		"/usr/include/lua5.3",
+		"/home/midnightpegasus/anaconda3/include/qt",
+		"/home/midnightpegasus/anaconda3/include/qt/QtWidgets",
+		"/home/midnightpegasus/anaconda3/include/qt/QtGui",
+		"/home/midnightpegasus/anaconda3/include/qt/QtCore",
+		"/home/midnightpegasus/anaconda3/mkspecs/linux-g++",
+		"/usr/include",
+		"/usr/local/include",
+		"/usr/include/c++/9",
+		"/usr/include/x86_64-linux-gnu/c++/9",
+		"/usr/include/c++/9/backward",
+		"/usr/lib/gcc/x86_64-linux-gnu/9/include",
+		"/usr/include/x86_64-linux-gnu"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : true,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing/kheperaiv_diffusion_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 8,
+	"PARSE_CACHE_FILE" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing/CMakeFiles/kheperaiv_diffusion_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/home/midnightpegasus/anaconda3/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"SETTINGS_FILE" : "/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_simulator/testing/CMakeFiles/kheperaiv_diffusion_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/src/testing/kheperaiv_diffusion.cpp",
+			"Mu"
+		]
+	],
+	"VERBOSITY" : 0
+}

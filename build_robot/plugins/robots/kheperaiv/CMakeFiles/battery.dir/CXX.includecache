@@ -1,0 +1,10 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/midnightpegasus/Documents/WPI/MQP/Pinci_Send/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv/battery_autogen/mocs_compilation.cpp
+
