@@ -14,7 +14,7 @@ class CRealKheperaIVTurretGripperActuator :
 
 public:
 
-   CRealKheperaIVTurretGripperActuator();
+   CRealKheperaIVTurretGripperActuator(knet_dev_t* pt_dspic);
    
    virtual ~CRealKheperaIVTurretGripperActuator();
 

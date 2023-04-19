@@ -3,9 +3,11 @@
 /****************************************/
 /****************************************/
 
-CRealKheperaIVTurretEncoderSensor::CRealKheperaIVTurretEncoderSensor(){
-   m_nTurretEncoder = 0;
-   m_fTurretEncoderDegrees = 0;   
+CRealKheperaIVTurretEncoderSensor::CRealKheperaIVTurretEncoderSensor(knet_dev_t* pt_dspic) :
+   CRealKheperaIVDevice(pt_dspic) {
+   m_nTurretEncoder = cgripper_Turret_Get_Position();
+   m_fTurretEncoderDegrees = (float) m_nTurretEncoder / 44690.0 * 360.0;
+   m_cRotation = CRadians(m_fTurretEncoderDegrees);  
 }
 
 /****************************************/
@@ -17,11 +19,11 @@ CRealKheperaIVTurretEncoderSensor::~CRealKheperaIVTurretEncoderSensor() {
 /****************************************/
 /****************************************/
 
-const CRadians& CRealKheperaIVTurretEncoderSensor::GetRotation() const {
-      return m_cRotation;
-}
+// const CRadians& CRealKheperaIVTurretEncoderSensor::GetRotation() const {
+//       return m_cRotation;
+// }
 
-void CRealKheperaIVTurretEncoderSensor::Do() {
+void CRealKheperaIVTurretEncoderSensor::Do(Real f_elapsed_time) {
    /*
     * The encoder function call to the turret gripper module gives us the prediced rotation of the gripper in degrees
     * m_nTurretEncoder is in encoder tics 0 to 44690,
@@ -30,7 +32,7 @@ void CRealKheperaIVTurretEncoderSensor::Do() {
    
    m_nTurretEncoder = cgripper_Turret_Get_Position();
    m_fTurretEncoderDegrees = (float) m_nTurretEncoder / 44690.0 * 360.0;
-   m_cRotation = CRadians(m_fTurretEncoderDegrees)
+   m_cRotation = CRadians(m_fTurretEncoderDegrees);
 }
 
 /****************************************/

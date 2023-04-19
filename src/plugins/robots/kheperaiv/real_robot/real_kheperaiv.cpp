@@ -8,8 +8,7 @@
 #include "real_kheperaiv_lidar_sensor.h"
 #include "real_kheperaiv_proximity_sensor.h"
 #include "real_kheperaiv_ultrasound_sensor.h"
-#include "real_kheperaiv_gripper_actuator.h"
-#include "real_kheperaiv_gripper_sensor.h"
+// #include "real_kheperaiv_turret_gripper_actuator.h"
 #include "real_kheperaiv_turret_actuator.h"
 #include "real_kheperaiv_turret_encoder_sensor.h"
 #include "real_kheperaiv_turret_gripper_actuator.h"
@@ -76,8 +75,21 @@ CCI_Actuator* CRealKheperaIV::MakeActuator(const std::string& str_name) {
    MAKE_ACTUATOR(CRealKheperaIVDifferentialSteeringActuator,
                  "differential_steering");
    // MAKE_ACTUATOR(CRealKheperaIVGripperActuator, "gripper");
+
    MAKE_ACTUATOR(CRealKheperaIVTurretGripperActuator, "gripper");
    MAKE_ACTUATOR(CRealKheperaIVTurretActuator, "turret");
+
+   // if(str_name == "gripper"){
+   //    CRealKheperaIVTurretGripperActuator* pcAct = new CRealKheperaIVTurretGripperActuator();
+   //    m_vecActuators.push_back(pcAct);
+   //    LOG <<"[INFO] Initialized \"" << "turret" << "\" actuator " << std::endl;
+   // }
+   // if(str_name == "turret"){
+   //    CRealKheperaIVTurretActuator* pcAct = new CRealKheperaIVTurretActuator();
+   //    m_vecActuators.push_back(pcAct);
+   //    LOG <<"[INFO] Initialized \"" << "turret" << "\" actuator " << std::endl;
+   // }
+
    MAKE_ACTUATOR(CRealKheperaIVLEDsActuator,
                  "leds");
    return NULL;
