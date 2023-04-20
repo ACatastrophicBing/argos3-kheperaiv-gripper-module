@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "khepera.h": "c",
+        "cgripperi2c.h": "c"
+    }
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="0" />
+    <experiment length="600"
+                ticks_per_second="10"
+                random_seed="124" />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+    <kheperaiv_diffusion_controller id="khivgt"
+                               library="build/testing/libkheperaiv_gripper">
+      <actuators>
+        <differential_steering implementation="default" />
+        <kheperaiv_gripper     implementation="default" show_rays="true" />
+        <kheperaiv_turret      implementation="default" />
+      </actuators>
+      <sensors>
+        <differential_steering implementation="default" />
+        <kheperaiv_proximity implementation="default" show_rays="false" />
+        <kheperaiv_ultrasound implementation="default" show_rays="false" />
+      </sensors>
+      <params alpha="7.5" delta="0.1" velocity="5" />
+    </kheperaiv_diffusion_controller>
+
+  </controllers>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="5, 5, 1" center="0,0,0.5">
+
+    <box id="wall_north" size="4,0.1,0.5" movable="false">
+      <body position="0,2,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_south" size="4,0.1,0.5" movable="false">
+      <body position="0,-2,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_east" size="0.1,4,0.5" movable="false">
+      <body position="2,0,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_west" size="0.1,4,0.5" movable="false">
+      <body position="-2,0,0" orientation="0,0,0" />
+    </box>
+
+    <!--
+       Only testing with a single robot initially
+    -->
+    <kheperaiv id="kiv_0" rab_data_size="100">
+      <body position="0,0,0" orientation="0,0,0" />
+      <controller config="khivgt" />
+    </kheperaiv>
+
+    <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
+      <body position="0.1850,0,0" orientation="0,0,0" />
+    </cylinder>
+
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+    <!-- <pointmass3d id="dyn2d" /> -->
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media />
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+    <qt-opengl>
+      <camera>
+        <placements>
+          <placement index="0" position="-1.37702,-1.04453,0.308332" look_at="-1.1334,-1.85855,-0.21895" up="0.15118,-0.505144,0.849691" lens_focal_length="20" />
+        </placements>
+      </camera>
+    </qt-opengl>
+  </visualization>
+
+</argos-configuration>

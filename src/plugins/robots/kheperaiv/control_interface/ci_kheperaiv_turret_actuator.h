@@ -52,7 +52,7 @@ namespace argos {
 
 namespace argos {
 
-   class CCI_KheperaIVTurretActuator : virtual public CCI_Actuator {
+   class CCI_KheperaIVTurretActuator : public CCI_Actuator {
 
    public:
 

@@ -22,7 +22,7 @@ namespace argos {
 
 namespace argos {
 
-   class CCI_KheperaIVTurretEncoderSensor : virtual public CCI_Sensor {
+   class CCI_KheperaIVTurretEncoderSensor : public CCI_Sensor {
 
    public:
 

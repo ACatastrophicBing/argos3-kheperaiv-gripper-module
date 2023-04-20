@@ -51,3 +51,10 @@ To compile the Khepera IV plugin code, follow these instructions:
     $ cmake -DCMAKE_TOOLCHAIN_FILE=${KHIVPATH}/src/cmake/TargetKheperaIV.cmake -DCMAKE_INSTALL_PREFIX=${INSTALLPREFIX} ../src
     $ make install
 
+### Proper Compilation of Khepera IV plugin real ###
+
+To compile the code in the docker image properly, follow these instructions:
+    $ mkdir build_robot
+    $ cd build_robot
+    $ cmake -DARGOS_BUILD_FOR=khiv -DCMAKE_TOOLCHAIN_FILE=../src/cmake/TargetKheperaIV.cmake -DCMAKE_INSTALL_PREFIX=$ARGOS3KHIV -DKHEPERAIV_LIBS=$ARGOS3KHIV ../src
+    $ make install

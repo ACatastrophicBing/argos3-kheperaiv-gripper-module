@@ -25,7 +25,7 @@ namespace argos {
 
 namespace argos {
 
-   class CCI_KheperaIVGripperActuator : virtual public CCI_Actuator {
+   class CCI_KheperaIVGripperActuator : public CCI_Actuator {
 
    public:
 
@@ -65,12 +65,12 @@ namespace argos {
       /**
        * Sets gripper aperture to lock, positive direction.
        */
-      void Lock();
+      virtual void Lock();
 
       /**
        * Unlock gripper: objects are released.
        */
-      void Unlock();
+      virtual void Unlock();
 
 #ifdef ARGOS_WITH_LUA
       virtual void CreateLuaState(lua_State* pt_lua_state);

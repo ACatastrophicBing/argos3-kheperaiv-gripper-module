@@ -11,6 +11,7 @@
 // #include "real_kheperaiv_turret_gripper_actuator.h"
 #include "real_kheperaiv_turret_actuator.h"
 #include "real_kheperaiv_turret_encoder_sensor.h"
+#include "real_kheperaiv_turret_force_sensor.h"
 #include "real_kheperaiv_turret_gripper_actuator.h"
 #include <argos3/core/utility/logging/argos_log.h>
 
@@ -75,21 +76,8 @@ CCI_Actuator* CRealKheperaIV::MakeActuator(const std::string& str_name) {
    MAKE_ACTUATOR(CRealKheperaIVDifferentialSteeringActuator,
                  "differential_steering");
    // MAKE_ACTUATOR(CRealKheperaIVGripperActuator, "gripper");
-
    MAKE_ACTUATOR(CRealKheperaIVTurretGripperActuator, "gripper");
    MAKE_ACTUATOR(CRealKheperaIVTurretActuator, "turret");
-
-   // if(str_name == "gripper"){
-   //    CRealKheperaIVTurretGripperActuator* pcAct = new CRealKheperaIVTurretGripperActuator();
-   //    m_vecActuators.push_back(pcAct);
-   //    LOG <<"[INFO] Initialized \"" << "turret" << "\" actuator " << std::endl;
-   // }
-   // if(str_name == "turret"){
-   //    CRealKheperaIVTurretActuator* pcAct = new CRealKheperaIVTurretActuator();
-   //    m_vecActuators.push_back(pcAct);
-   //    LOG <<"[INFO] Initialized \"" << "turret" << "\" actuator " << std::endl;
-   // }
-
    MAKE_ACTUATOR(CRealKheperaIVLEDsActuator,
                  "leds");
    return NULL;
@@ -116,6 +104,8 @@ CCI_Sensor* CRealKheperaIV::MakeSensor(const std::string& str_name) {
 	       "differential_steering");
    MAKE_SENSOR(CRealKheperaIVGroundSensor,
                "kheperaiv_ground");
+   MAKE_SENSOR(CRealKheperaIVTurretForceSensor,
+               "kheperaiv_force");
    MAKE_SENSOR(CRealKheperaIVTurretEncoderSensor,
                "khepera_turret");
    MAKE_SENSOR(CRealKheperaIVLIDARSensor,

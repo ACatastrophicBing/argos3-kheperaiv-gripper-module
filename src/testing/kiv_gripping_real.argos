@@ -35,8 +35,8 @@
 
     <buzz_controller_kheperaiv id="sync">
       <actuators>
-        <differential_steering implementation="default" vel_noise_range="-0.01:0.01"/>
-        <leds                  implementation="default" medium="leds" noise_level="0.09"/>
+        <differential_steering implementation="default" />
+        <leds                  implementation="default" medium="leds" />
         <range_and_bearing     implementation="default" />
         <kheperaiv_gripper     implementation="default" show_rays="true" />
         <kheperaiv_turret      implementation="default" />
@@ -46,10 +46,7 @@
         <kheperaiv_proximity implementation="default" />
         <range_and_bearing   implementation="medium" medium="rab"
                              show_rays="true" noise_std_dev="0" />
-        <positioning implementation="default"
-          pos_noise_range="-0.001:0.001"
-          angle_noise_range="-0.005:0.005"
-          axis_noise_range="-0.001:0.001" />
+        <positioning         implementation="default" />
       </sensors>
       
       <params>
@@ -106,7 +103,7 @@ $ argos3 -q box
         standard deviation is 360 degrees.
     -->
     
-    <!--
+    
     <kheperaiv id="kiv_0" rab_data_size="100">
       <body position="0,0,0" orientation="0,0,0" />
       <controller config="sync" />
@@ -116,7 +113,7 @@ $ argos3 -q box
     <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
       <body position="0.1850,0,0" orientation="0,0,0" />
     </cylinder>
-    -->
+    
     
     <!--
     <box id="c" size="0.2,0.2,0.2" mass="0.1" movable="true">
@@ -156,11 +153,7 @@ $ argos3 -q box
       $ argos3 -q physics_engines
   -->
   <physics_engines>
-    <tracking>
-      <updaters>
-        <vicon_updater/>
-      </updaters>
-    </tracking>
+    <dynamics2d id="dyn2d" />
   </physics_engines>
 
   <!-- ********* -->
@@ -174,7 +167,10 @@ $ argos3 -q box
 
 $ argos3 -q media
   -->
-  <media />
+  <media>
+    <range_and_bearing id="rab" />
+    <led id="leds" />
+  </media>
 
   <!-- ****************** -->
   <!-- * Visualization * -->
@@ -190,16 +186,11 @@ $ argos3 -q media
 
 $ argos3 -q visualizations
   -->
-  <!-- 
   <visualization>
     <qt-opengl>
       <user_functions label="buzz_qt" />
       <camera>
         <placements>
-        <placements>
-          <placement index="0" position="0,0,8.14689" look_at="0,0,0" up="1,0,0"
-            lens_focal_length="65" />
-        </placements>
           <placement index="0" position="0,0,11" look_at="0,0,0" up="0,1,0" lens_focal_length="65" />
           <placement index="2" position="4.78486,4.0464,2.7378" look_at="4.08294,3.44453,2.35694" up="-0.289125,-0.247915,0.924632" lens_focal_length="53.75" />
           <placement index="3" position="0.0142988,6.39367,3.96617" look_at="0.0142988,5.54847,3.43172" up="-2.16018e-16,-0.534447,0.845202" lens_focal_length="65" />
@@ -208,28 +199,5 @@ $ argos3 -q visualizations
       </camera>
     </qt-opengl>
   </visualization>
-
--->
-
-<visualization>
-    <qt-opengl>
-      <camera>
-        <placements>
-          <placement index="0" position="0,0,8.14689" look_at="0,0,0" up="1,0,0"
-            lens_focal_length="65" />
-        </placements>
-      </camera>
-
-    </qt-opengl>
-  </visualization>
-
-
-  <loop_functions label="MasterLoopFunctions">
-
-    <sub_loop_functions label="BaseNetworking"/>
-
-  </loop_functions>
-
-
 
 </argos-configuration>

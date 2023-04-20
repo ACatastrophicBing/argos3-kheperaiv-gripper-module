@@ -32,3 +32,17 @@ void CRealKheperaIVTurretGripperActuator::Lock(){
 void CRealKheperaIVTurretGripperActuator::Unlock(){
    cgripper_Open_Gripper();
 }
+
+
+void CRealKheperaIVTurretGripperActuator::EnableCheckForObjectGrippedRoutine(){
+   /**
+    * TODO : Needs to use the parallel force sensor to check if a connection is properly made
+    */
+}
+
+
+void CRealKheperaIVTurretGripperActuator::DisableCheckForObjectGrippedRoutine(){
+   /**
+    * TODO : Needs to use the parallel force sensor to check if a connection is properly made
+    */
+}

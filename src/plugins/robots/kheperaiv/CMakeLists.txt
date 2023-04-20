@@ -54,6 +54,7 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
     real_robot/real_kheperaiv_turret_encoder_sensor.h
     real_robot/real_kheperaiv_turret_gripper_actuator.h
     real_robot/real_kheperaiv_turret_actuator.h
+    real_robot/real_kheperaiv_turret_force_sensor.h
     # TODO : Make the real robot force sensor code
     )
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")
@@ -127,6 +128,7 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
     real_robot/real_kheperaiv_turret_encoder_sensor.cpp
     real_robot/real_kheperaiv_turret_gripper_actuator.cpp
     real_robot/real_kheperaiv_turret_actuator.cpp
+    real_robot/real_kheperaiv_turret_force_sensor.cpp
     # TODO : Make the real robot code
     )
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")
@@ -157,6 +159,13 @@ endif(BUZZ_FOUND)
 if(ARGOS_BUILD_FOR STREQUAL "khiv")
   add_executable(battery real_robot/battery.c)
   target_link_libraries(battery -lkhepera)
+endif(ARGOS_BUILD_FOR STREQUAL "khiv")
+
+#
+# Create Gripper Helper Class
+#
+if(ARGOS_BUILD_FOR STREQUAL "khiv")
+add_executable(cgripperI2C real_robot/helpers/cgripperI2C.c)
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 
 #

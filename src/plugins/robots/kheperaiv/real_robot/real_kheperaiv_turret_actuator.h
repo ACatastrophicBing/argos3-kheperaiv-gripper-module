@@ -9,20 +9,18 @@
 using namespace argos;
 
 class CRealKheperaIVTurretActuator :
-   // public CCI_KheperaIVTurretActuator,
-   public CCI_Actuator,
-   public CRealKheperaIVDevice
-   {
+   public CCI_KheperaIVTurretActuator,
+   public CRealKheperaIVDevice {
 
-public:
+// public:
 
-   /** Turret modes */
-   enum ETurretModes {
-      MODE_OFF,
-      MODE_PASSIVE,
-      MODE_SPEED_CONTROL,
-      MODE_POSITION_CONTROL
-   };
+//    /** Turret modes */
+//    enum ETurretModes {
+//       MODE_OFF,
+//       MODE_PASSIVE,
+//       MODE_SPEED_CONTROL,
+//       MODE_POSITION_CONTROL
+//    };
 
 //    static const CRange<SInt32> SPEED_RANGE;
 //    static const CRange<Real>   NORMALIZED_SPEED_RANGE;
@@ -30,8 +28,6 @@ public:
 public:
 
    CRealKheperaIVTurretActuator(knet_dev_t* pt_dspic);
-   // CRealKheperaIVTurretActuator();
-
 
    virtual ~CRealKheperaIVTurretActuator();
 
@@ -42,23 +38,31 @@ public:
     * Turret rotation is expressed in radians, positive values rotate the turret clockwise
     * when looking from above.
     * @param c_angle desired turret rotation
+    * Takes in a c_angle between 0 to 2 pi
     */
-   // virtual void SetRotation(const CRadians& c_angle) = 0;
+   virtual void SetRotation(const CRadians& c_angle);
+
+   /**
+    * @brief Sets the turret control mode to active, and sets the target rotation to the given one
+    * @param c_angle desired turret rotation
+    * @see SetRotation
+    */
+   virtual void SetActiveWithRotation(const CRadians& c_angle);
 
    /**
     * @brief Sets the turret rotation speed
     * Turret rotation speed is expressed in motor pulses, positive values rotate the turret clockwise
     * when looking from above.
-    * @param n_speed_pulses desired turret rotation speed - pid pulses
+    * @param n_speed_pulses desired turret rotation speed - in motor frequency speed units
     */
-   // virtual void SetRotationSpeed(SInt32 n_speed_pulses) = 0;
+   virtual void SetRotationSpeed(SInt32 speed);
 
    /**
     * @brief Sets the turret control mode
     * Modes are: angular position control, rotation speed control, passive mode, off
     * @param un_mode turret control mode, possible values are defined in CCI_KheperaIVTurretActuator
     */
-   // virtual void SetMode(ETurretModes e_mode) = 0;
+   virtual void SetMode(ETurretModes e_mode);
 
 private:
    ETurretModes m_eMode;

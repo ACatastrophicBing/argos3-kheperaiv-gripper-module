@@ -4,11 +4,12 @@
 #include <argos3/plugins/robots/kheperaiv/real_robot/real_kheperaiv_device.h>
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_turret_encoder_sensor.h>
 #include <argos3/core/utility/math/vector2.h>
+#include "cgripperI2C.h"
 
 using namespace argos;
 
 class CRealKheperaIVTurretEncoderSensor :
-   public CCI_Sensor,
+   public CCI_KheperaIVTurretEncoderSensor,
    public CRealKheperaIVDevice {
 
 public:
@@ -17,7 +18,13 @@ public:
    
    virtual ~CRealKheperaIVTurretEncoderSensor();
 
-   // virtual const CRadians& GetRotation() const;
+   /**
+    * @brief Get the current turret's rotation
+    * Will return as a value between 0 to 2 pi depending on the
+    * encoder counts read
+    * @return const CRadians& 
+    */
+   virtual const CRadians& GetRotation();
 
    virtual void Do(Real f_elapsed_time);
 
