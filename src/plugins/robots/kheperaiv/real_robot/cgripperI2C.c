@@ -11,11 +11,33 @@
  * \todo     Save all the information that we send to the gripper turret in here on variables maybes?
  */
 #include "cgripperI2C.h"
-#include "i2c_Collective.c"
 #include <khepera/khepera.h>
 #include <khepera/i2ccom.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+int i2c_read16( i2c_t * i2c ,
+		i2c_dev_t dev ,
+		unsigned char reg ,
+		unsigned short *val )
+{
+  return i2c_lltransfer( i2c , dev , &reg , 1 , 
+			 (unsigned char *)val , 2 );
+}
+
+int i2c_write16( i2c_t * i2c ,
+		 i2c_dev_t dev ,
+		 unsigned char reg ,
+		 unsigned short val )
+{
+  unsigned char buf[3];
+
+  buf[0] = reg;
+  buf[1] = val;
+  buf[2] = (val>>8);
+
+  return i2c_llwrite( i2c , dev , buf , 3 );
+}
 
 i2c_t i2c;
 // TODO : Check if this devpath even works (seems to worlk - Yasmine)
