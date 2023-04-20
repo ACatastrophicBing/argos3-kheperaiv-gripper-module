@@ -10,9 +10,9 @@
  * \bug      none discovered.
  * \todo     Save all the information that we send to the gripper turret in here on variables maybes?
  */
-#include "cgripperI2C.h"
 #include <khepera/khepera.h>
 #include <khepera/i2ccom.h>
+#include "cgripperI2C.h"
 #include <stdlib.h>
 #include <stdio.h>
 
