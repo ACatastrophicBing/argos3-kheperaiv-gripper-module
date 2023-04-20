@@ -10,11 +10,6 @@
 #ifndef __cgripperI2C__
 #define __cgripperI2C__
 
-#include <khepera/khepera.h>
-#include <khepera/i2ccom.h>
-#include <stdlib.h>
-#include <stdio.h>
-
 /*--------------------------------------------------------------------
  *!  Continuity Tester Register For Setup
  *   Set to 1 if you want to check if the module and all its pieces 
@@ -37,6 +32,7 @@
 #define TURRET_TRIM                     0x1C
 #define TURRET_AUTOTRIM                 0x1D
 #define RAW_TURRET_POSITION             0x01
+#define TURRET_FORCE_PROPORTIONAL       0x00
 
 /*--------------------------------------------------------------------
  *	Gripper Register Definition, only send 0 or 1

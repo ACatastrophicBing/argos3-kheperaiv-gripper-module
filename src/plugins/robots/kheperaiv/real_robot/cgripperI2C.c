@@ -12,6 +12,10 @@
  */
 #include "cgripperI2C.h"
 #include "i2c_Collective.c"
+#include <khepera/khepera.h>
+#include <khepera/i2ccom.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 i2c_t i2c;
 // TODO : Check if this devpath even works (seems to worlk - Yasmine)
