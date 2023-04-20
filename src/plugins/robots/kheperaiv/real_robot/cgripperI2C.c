@@ -4,22 +4,23 @@
  * \brief
  *         This module is layer for communication with the collective's khepera 4 Gripper module.
  *
- * \author   Chandler Garcia & Yasmine Aoua
+ * \author   Chandler Garcia
  *
- * \note     We are using the kb_gripper code for reference
+ * \note     We are using the i2ccom.h code for reference
  * \bug      none discovered.
  * \todo     Save all the information that we send to the gripper turret in here on variables maybes?
  */
-
-#include "khepera/khepera.h"
-#include "i2c_Collective.c"
 #include "cgripperI2C.h"
+#include "i2c_Collective.c"
 
 i2c_t i2c;
 // TODO : Check if this devpath even works (seems to worlk - Yasmine)
 char *devpath = NULL;// might default to correct devpath, but unsure
 int status;
-int addr = 0x24; // CONFIRMED CORRECT
+
+/* Address of our gripper module */
+int addr = 0x24;
+// float m_PI = 3.14159265359;
 
 int cgripper_init( void ){
 	/* 
@@ -37,66 +38,11 @@ int cgripper_init( void ){
 	  return 0;
 }
 
-int close_gripper(void){
-	/*
-	 * Close the gripper module
-	*/
-
-	// stop turning
-	i2c_write16(&i2c, addr, 0x8, 0);
-	sleep(1);
-
-	// turn off LEDs
-	i2c_write16(&i2c, addr, 0x16, 0);
-	// sleep(1);
-	i2c_write16(&i2c, addr, 0x17, 0);
-	// sleep(1);
-	i2c_write16(&i2c, addr, 0x18, 0);
-	// sleep(1);
-	i2c_write16(&i2c, addr, 0x19, 0);
-	// sleep(1);
-	i2c_write16(&i2c, addr, 0x1A, 0x001);
-	sleep(1);
-
-	// Remove the i2c connection
-	i2c_close(&i2c);
-}
-
 void cgripper_Modularity_Test(){
 	i2c_write16(&i2c, addr, CONTINUITY_TEST, 0x01);
 }
 
-/**********************************************/
-/**************Gripper Functions***************/
-/**********************************************/
 
-
-unsigned short cgripper_Gripper_Get_Position(){
-	/*
-	 * Unsure if this will ever be used, like why the hell do you want to know
-	 * where the gripper is? Did you NOT keep track of it yourself? Idiot
-	*/
-	unsigned short Position;
-	i2c_read16(&i2c,addr,CGRIPPER_POSITION,&Position);
-	return Position;
-	return Position;
-}
-
-void cgripper_Open_Gripper(){
-	i2c_write16(&i2c, addr, CGRIPPER_POSITION, 0x01);
-}
-
-void cgripper_Close_Gripper(){
-	i2c_write16(&i2c, addr, CGRIPPER_POSITION, 0x00);
-}
-
-void cgripper_Gripper_Set_Position( unsigned short Position){
-	/* 
-	 * The Position is 0 closed, 1 is open, anything else is fucked up man, 
-	 * why are you using this command
-	*/
-	i2c_write16(&i2c,addr,CGRIPPER_POSITION,Position); // for testing on pi pico
-}
 
 /**********************************************/
 /***************Turret Functions***************/
@@ -120,24 +66,27 @@ unsigned short cgripper_Turret_Get_Raw_Position(){
 	return Position;
 }
 
-void cgripper_Turret_Set_Position(float pos){
+void cgripper_Turret_Set_Position(unsigned short pos){
 	/*
-	 * Takes in a number 0 to 2pi and converts that into the robot's position between 0 to 44690
+	 * Takes in an encoder position count between 0 and 44690 where 0 is 0 radians, and 44690 is 2 pi radians
 	*/
-	// pos = pos * 359;
-	unsigned short posToEncoder = pos * 359;
+	// unsigned short posToEncoder = (unsigned short) pos / (m_PI * 2) * 44690;
 	i2c_write16(&i2c, addr, TURRET_SET_POSITION, pos);
 }
 
-/* Speed Information (Sets and Gets) */
 unsigned short cgripper_Turret_Get_Speed(){
-	// TODO : Update this to send the speed which we sent it to go at last time
+	/*
+	 * Returns speed of turret in frequency units
+	*/
 	unsigned short Speed;
 	status = i2c_read16(&i2c,addr,TURRET_SPEED,&Speed);
 	return Speed;
 }
 
 void cgripper_Turret_Set_Speed(short speed){
+	/*
+	 * Sets speed in frequency units
+	*/
 	i2c_write16(&i2c, addr, TURRET_SPEED, speed);
 }
 
@@ -150,7 +99,7 @@ unsigned short cgripper_Turret_Get_Max_Speed(){
 
 void cgripper_Turret_Set_Max_Speed( unsigned short Max_Speed){
 //	knet_write16( dev , TURRET_MAX_SPEED , Max_Speed );
-	status = i2c_write16(&i2c, addr, TURRET_MAX_SPEED, Max_Speed);
+	i2c_write16(&i2c, addr, TURRET_MAX_SPEED, Max_Speed);
 }
 
 /* Degree Error Information */
@@ -162,7 +111,7 @@ unsigned short cgripper_Turret_Get_Max_Tolerance(){
 }
 
 void cgripper_Turret_Set_Max_Tolerance( unsigned short Max_Tolerance){
-	status = i2c_write16(&i2c, addr, TURRET_MAX_TOLERANCE, Max_Tolerance);
+	i2c_write16(&i2c, addr, TURRET_MAX_TOLERANCE, Max_Tolerance);
 }
 
 void cgripper_Turret_Total_Reset(){
@@ -171,21 +120,23 @@ void cgripper_Turret_Total_Reset(){
 	 * To be open
 	*/
 	cgripper_Turret_Set_Autotrim(0x01);
-    sleep(0.1);
     cgripper_Set_EEPROM(0x01);
-    sleep(0.1);
 }
 
 /* Reset Turret Encoder's Relative 0 Information */
 void cgripper_Turret_Set_Autotrim(unsigned short Autotrim){
 	/*
-	 * Setting this to 1, we will update the encoder's recognized 0 degree for the turret
+	 * By setting this to 1, we will update the encoder's recognized 0 degree for the turret
 	*/
 	i2c_write16(&i2c, addr, TURRET_AUTOTRIM, Autotrim);
 }
 
 void cgripper_Turret_Set_Trim(unsigned short Trim){
 	i2c_write16(&i2c, addr, TURRET_TRIM, Trim);
+}
+
+void cgripper_Set_EEPROM(unsigned short val){
+	i2c_write16(&i2c, addr, EEPROM_REGISTER, val);
 }
 
 /* Set the Turret's mode, you will most likely always be using Position Mode */
@@ -204,6 +155,60 @@ void cgripper_Turret_Speed_Mode(){
 void cgripper_Turret_Locked(){
 	i2c_write16(&i2c, addr, 0x8, 0x3);
 }
+
+void cgripper_Turret_Push(){
+	i2c_write16(&i2c, addr, 0x8, 0x4);
+}
+
+void cgripper_Turret_Set_Proportional(unsigned short Proportional){
+	i2c_write16(&i2c, addr, TURRET_PROPORTIONAL_CONSTANT, Proportional);
+}
+
+void cgripper_Turret_Set_Integral(unsigned short Integral){
+	i2c_write16(&i2c, addr, TURRET_INTEGRAL_CONSTANT, Integral);
+}
+
+void cgripper_Turret_Set_Derivative(unsigned short Derivative){
+	i2c_write16(&i2c, addr, TURRET_DERIVATIVE_CONSTANT, Derivative);
+}
+
+void cgripper_Turret_Force_Tolerance(unsigned short Proportional){
+	i2c_write16(&i2c,addr, TURRET_FORCE_PROPORTIONAL, Proportional);
+}
+
+
+/**********************************************/
+/**************Gripper Functions***************/
+/**********************************************/
+
+unsigned short cgripper_Gripper_Get_Position(){
+	/*
+	 * Unsure if this will ever be used, like why the hell do you want to know
+	 * where the gripper is? Did you NOT keep track of it yourself? 
+	 * Welp this returns 1 if open, 0 if closed
+	*/
+	unsigned short Position;
+	i2c_read16(&i2c,addr,CGRIPPER_POSITION,&Position);
+	return Position;
+}
+
+void cgripper_Open_Gripper(){
+	i2c_write16(&i2c, addr, CGRIPPER_POSITION, 0x01);
+}
+
+void cgripper_Close_Gripper(){
+	i2c_write16(&i2c, addr, CGRIPPER_POSITION, 0x00);
+}
+
+void cgripper_Gripper_Set_Position( unsigned short Position){
+	/* 
+	 * The Position is 0 closed, 1 is open, anything else is just wrong, 
+	 * why are you using this command, just use open or close gripper
+	 * Hell, why do we even have this function
+	*/
+	i2c_write16(&i2c,addr,CGRIPPER_POSITION,Position); // for testing on pi pico
+}
+
 
 /**********************************************/
 /*************Force Sensor Functions***********/
@@ -227,7 +232,6 @@ unsigned short cgripper_ForceSensor_Get_Perpendicular_Force(){
 /**********************************************/
 unsigned short cgripper_LEDRing_Get_Config(){
 	unsigned short Config;
-//	knet_read8( dev , LED_STATUS , &Config );
 	i2c_read16(&i2c,addr,LED_CONFIG,&Config);
 	return Config;
 
@@ -238,61 +242,52 @@ void cgripper_LEDRing_Set_Status( unsigned short Config){
 
 void testLED() {
 	i2c_write16(&i2c, addr, 0x16, 0x6DB6);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x17, 0xDB6D);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x18, 0xB6DB);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x19, 0x6DB6);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x1A, 0x0001);
-	sleep(1);
-	int i=0;i2c_write16(&i2c, addr, 0xD, i);
+	int i=0;
+	i2c_write16(&i2c, addr, 0xD, i);
 	for(i=0; i<32; i++){
 		i2c_write16(&i2c, addr, 0xD, i);
 		i2c_write16(&i2c, addr, 0x1A, 0x0001);
-		usleep(500000);
+		/* TODO : Find a time based function to change
+		 * The brightness of the LED's */
 	}
 }
 
-void setAllRed() {
+void setAllPreset1() {
 	i2c_write16(&i2c, addr, 0x16, 0x5555);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x17, 0x5555);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x18, 0x5555);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x19, 0x5555);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0xD, 12);
 	i2c_write16(&i2c, addr, 0x1A, 0x0001);
 }
 
-void setAllGreen() {
+void setAllPreset2() {
 	i2c_write16(&i2c, addr, 0x16, 0xAAAA);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x17, 0xAAAA);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x18, 0xAAAA);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0x19, 0xAAAA);
-	// sleep(1);
 	i2c_write16(&i2c, addr, 0xD, 2);
 	i2c_write16(&i2c, addr, 0x1A, 0x0001);
 }
 
-void setKi(int Ki){
-	i2c_write16(&i2c, addr, 0x6, Ki);
+void setAllPreset3() {
+	i2c_write16(&i2c, addr, 0x16, 0xFFFF);
+	i2c_write16(&i2c, addr, 0x17, 0xFFFF);
+	i2c_write16(&i2c, addr, 0x18, 0xFFFF);
+	i2c_write16(&i2c, addr, 0x19, 0xFFFF);
+	i2c_write16(&i2c, addr, 0xD, 2);
+	i2c_write16(&i2c, addr, 0x1A, 0x0001);
 }
 
-void setKp(int Kp){
-	i2c_write16(&i2c, addr, 0x5, Kp);
-}
-
-void cgripper_Set_EEPROM(){
-	i2c_write16(&i2c, addr, EEPROM_REGISTER, 1);
-}
-
-void set_turret_zero(){
-	i2c_write16(&i2c, addr, TURRET_TRIM, 1);
+void setAllOff() {
+	i2c_write16(&i2c, addr, 0x16, 0x0000);
+	i2c_write16(&i2c, addr, 0x17, 0x0000);
+	i2c_write16(&i2c, addr, 0x18, 0x0000);
+	i2c_write16(&i2c, addr, 0x19, 0x0000);
+	i2c_write16(&i2c, addr, 0xD, 0);
+	i2c_write16(&i2c, addr, 0x1A, 0x0001);
 }

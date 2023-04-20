@@ -10,8 +10,10 @@
 #ifndef __cgripperI2C__
 #define __cgripperI2C__
 
-#include <khepera/knet.h>
+#include <khepera/khepera.h>
 #include <khepera/i2ccom.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 /*--------------------------------------------------------------------
  *!  Continuity Tester Register For Setup
@@ -67,51 +69,50 @@
  */
 
 extern int cgripper_init(void);
-int close_gripper(void);
 /* Turret Functions */
 extern unsigned short cgripper_Turret_Get_Position();
 extern unsigned short cgripper_Turret_Get_Raw_Position();
-extern void cgripper_Turret_Set_Position(float pos);
+extern void cgripper_Turret_Set_Position(unsigned short pos);
 
 extern unsigned short cgripper_Turret_Get_Speed();
 extern void cgripper_Turret_Set_Speed(short speed);
 
 extern unsigned short cgripper_Turret_Get_Max_Speed();
-extern unsigned short cgripper_Turret_Get_Max_Tolerance();
 extern void cgripper_Turret_Set_Max_Speed( unsigned short Max_Speed);
+extern unsigned short cgripper_Turret_Get_Max_Tolerance();
 extern void cgripper_Turret_Set_Max_Tolerance( unsigned short Max_Tolerance);
 
+extern void cgripper_Turret_Total_Reset();
 extern void cgripper_Turret_Set_Autotrim(unsigned short Autotrim);
 extern void cgripper_Turret_Set_Trim(unsigned short Trim);
-extern void cgripper_Turret_Total_Reset();
 
 extern void cgripper_Turret_Disable();
 extern void cgripper_Turret_Position_Mode();
 extern void cgripper_Turret_Speed_Mode();
 extern void cgripper_Turret_Locked();
 
-
 extern void cgripper_Modularity_Test();
 
+extern void cgripper_Set_EEPROM(unsigned short val);
 
-void cgripper_Set_EEPROM();
-
-
-extern void cgripper_Close_Gripper();
-extern void cgripper_Open_Gripper();
 /* Gripper Functions */
 extern unsigned short cgripper_Gripper_Get_Position();
-//extern unsigned short cgripper_Gripper_Get_Speed( knet_dev_t * dev );
 extern void cgripper_Gripper_Set_Position( unsigned short Position );
-//extern void cgripper_Gripper_Set_Speed( knet_dev_t * dev );
+extern void cgripper_Close_Gripper();
+extern void cgripper_Open_Gripper();
+
 /* Force Sensor Functions */
 extern unsigned short cgripper_ForceSensor_Get_Parallel_Force();
 extern unsigned short cgripper_ForceSensor_Get_Perpendicular_Force();
+
 /* LED Functions */
 extern unsigned short cgripper_LEDRing_Get_Config();
 extern void cgripper_LEDRing_Set_Status( unsigned short Config );
-void testLED();
-void set_turret_zero();
-void setKi(int Ki);
-void setKp(int Kp);
+extern void testLED();
+
+/* Sets ALL lights to these specific presets or off */
+extern void setAllPreset1();
+extern void setAllPreset2();
+extern void setAllPreset3();
+extern void setAllOff();
 #endif /*	cgripperI2C	*/
