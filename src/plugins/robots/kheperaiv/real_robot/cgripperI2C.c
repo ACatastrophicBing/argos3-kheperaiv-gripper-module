@@ -109,7 +109,7 @@ unsigned short cgripper_Turret_Get_Speed(){
 	return Speed;
 }
 
-void cgripper_Turret_Set_Speed(short speed){
+void cgripper_Turret_Set_Speed(unsigned short speed){
 	/*
 	 * Sets speed in frequency units
 	*/
@@ -140,15 +140,6 @@ void cgripper_Turret_Set_Max_Tolerance( unsigned short Max_Tolerance){
 	i2c_write16(&i2c, addr, TURRET_MAX_TOLERANCE, Max_Tolerance);
 }
 
-void cgripper_Turret_Total_Reset(){
-	/*
-	 * Do NOT call this unless you wish to RESET the turret's position and default the gripper
-	 * To be open
-	*/
-	cgripper_Turret_Set_Autotrim(0x01);
-    cgripper_Set_EEPROM(0x01);
-}
-
 /* Reset Turret Encoder's Relative 0 Information */
 void cgripper_Turret_Set_Autotrim(unsigned short Autotrim){
 	/*
@@ -163,6 +154,15 @@ void cgripper_Turret_Set_Trim(unsigned short Trim){
 
 void cgripper_Set_EEPROM(unsigned short val){
 	i2c_write16(&i2c, addr, EEPROM_REGISTER, val);
+}
+
+void cgripper_Turret_Total_Reset(){
+	/*
+	 * Do NOT call this unless you wish to RESET the turret's position and default the gripper
+	 * To be open
+	*/
+	cgripper_Turret_Set_Autotrim(1);
+    cgripper_Set_EEPROM(1);
 }
 
 /* Set the Turret's mode, you will most likely always be using Position Mode */

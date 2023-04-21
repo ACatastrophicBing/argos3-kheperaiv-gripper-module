@@ -5,6 +5,7 @@
  */
 
 #include "real_kheperaiv_turret_actuator.h"
+// #include "cgripperI2C.c"
 
   /****************************************/
   /****************************************/
@@ -36,7 +37,8 @@
 
   void CRealKheperaIVTurretActuator::SetRotationSpeed(SInt32 speed) {
     cgripper_Turret_Speed_Mode();
-    cgripper_Turret_Set_Speed((unsigned short) speed);
+    unsigned short tSpeed = (unsigned short) speed;
+    cgripper_Turret_Set_Speed(tSpeed);
   }
 
   /****************************************/

@@ -71,7 +71,7 @@ extern unsigned short cgripper_Turret_Get_Raw_Position();
 extern void cgripper_Turret_Set_Position(unsigned short pos);
 
 extern unsigned short cgripper_Turret_Get_Speed();
-extern void cgripper_Turret_Set_Speed(short speed);
+extern void cgripper_Turret_Set_Speed(unsigned short speed);
 
 extern unsigned short cgripper_Turret_Get_Max_Speed();
 extern void cgripper_Turret_Set_Max_Speed( unsigned short Max_Speed);

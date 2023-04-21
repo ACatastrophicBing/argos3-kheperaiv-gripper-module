@@ -38,6 +38,7 @@ endif(ARGOS_BUILD_FOR_SIMULATOR)
 # argos3/plugins/robots/kheperaiv/real_robot
 if(ARGOS_BUILD_FOR STREQUAL "khiv")
   set(ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_REALROBOT
+    real_robot/cgripperI2C.h
     real_robot/real_kheperaiv.h
     real_robot/real_kheperaiv_device.h
     real_robot/real_kheperaiv_differential_steering_device.h
@@ -112,6 +113,7 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
   set(ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV
     ${ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV}
     ${ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_REALROBOT}
+    real_robot/cgripperI2C.c
     real_robot/real_kheperaiv.cpp
     real_robot/real_kheperaiv_device.cpp
     real_robot/real_kheperaiv_differential_steering_device.cpp
@@ -164,10 +166,10 @@ endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 #
 # Create Gripper Helper Class
 #
-if(ARGOS_BUILD_FOR STREQUAL "khiv")
-add_executable(cgripperI2C real_robot/cgripperI2C.c)
-target_link_libraries(cgripperI2C -lkhepera)
-endif(ARGOS_BUILD_FOR STREQUAL "khiv")
+# if(ARGOS_BUILD_FOR STREQUAL "khiv")
+# add_library(cgripperI2C SHARED real_robot/cgripperI2C.c)
+# target_link_libraries(cgripperI2C -lkhepera)
+# endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 
 #
 # Installation
