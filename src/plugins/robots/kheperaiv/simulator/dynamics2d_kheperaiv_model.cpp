@@ -67,15 +67,27 @@ namespace argos {
       RegisterAnchorMethod<CDynamics2DKheperaIVModel>(
          GetEmbodiedEntity().GetAnchor("turret"),
          &CDynamics2DKheperaIVModel::UpdateTurretAnchor);
-         
+
+      cpVect bodyBoundingVert[] = { // create the bounding box of the robot as a bandaid solution instead of a cylinder
+         cpv(-KHEPERAIV_GRIPPER_RING_RADIUS, -KHEPERAIV_GRIPPER_RING_RADIUS),
+         cpv(-KHEPERAIV_GRIPPER_RING_RADIUS,  KHEPERAIV_GRIPPER_RING_RADIUS),
+         cpv( KHEPERAIV_GRIPPER_RING_RADIUS,  KHEPERAIV_GRIPPER_RING_RADIUS),
+         cpv( KHEPERAIV_GRIPPER_RING_RADIUS, -KHEPERAIV_GRIPPER_RING_RADIUS)
+      };   
       /* Create the actual body with initial position and orientation */
       m_ptActualBaseBody =
-         cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(),
+         cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(), // This is the actual robot
                         cpBodyNew(KHEPERAIV_MASS,
                                   cpMomentForCircle(KHEPERAIV_MASS,
                                                     0.0f,
                                                     KHEPERAIV_GRIPPER_RING_RADIUS + KHEPERAIV_GRIPPER_RING_RADIUS,
                                                     cpvzero)));
+         // cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(), // this is the bandaid to force the simulation to run perpendicular but it didn't work
+         //                cpBodyNew(KHEPERAIV_MASS / 2.0, // TODO Find what the actual weight of the module is
+         //                         cpMomentForPoly(KHEPERAIV_MASS,
+         //                            4,
+         //                            bodyBoundingVert,
+         //                            cpvzero)));
       const CVector3& cPosition = GetEmbodiedEntity().GetOriginAnchor().Position;
       m_ptActualBaseBody->p = cpv(cPosition.GetX(), cPosition.GetY());
       CRadians cXAngle, cYAngle, cZAngle;
@@ -84,9 +96,13 @@ namespace argos {
       /* Create the actual body shape */
       m_ptBaseShape =
          cpSpaceAddShape(GetDynamics2DEngine().GetPhysicsSpace(),
-                         cpCircleShapeNew(m_ptActualBaseBody,
-                                          KHEPERAIV_GRIPPER_RING_RADIUS,
-                                          cpvzero));
+                        //  cpCircleShapeNew(m_ptActualBaseBody, // actual robot
+                        //                   KHEPERAIV_GRIPPER_RING_RADIUS,
+                        //                   cpvzero));
+                        cpPolyShapeNew(m_ptActualBaseBody,
+                        4,
+                        bodyBoundingVert,
+                        cpvzero));
       m_ptBaseShape->e = 0.0; // No elasticity
       m_ptBaseShape->u = 0.7; // Lots of friction
       /* This shape is grippable */
@@ -97,29 +113,38 @@ namespace argos {
       /* Add the body so that the default methods work as expected */
       AddBody(m_ptActualBaseBody, cpvzero, 0, KHEPERAIV_BASE_TOP);
       /* Create the gripper body */      
+
+      /* Create the gripper body shape vector */
+      
       m_ptActualGripperBody =
          cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(),
                         cpBodyNew(KHEPERAIV_MASS / 2.0, // TODO Find what the actual weight of the module is
-                                  cpMomentForCircle(KHEPERAIV_MASS,
-                                                    0.0f,
-                                                    KHEPERAIV_GRIPPER_RING_RADIUS + KHEPERAIV_GRIPPER_RING_RADIUS,
-                                                    cpvzero)));
+                                 //  cpMomentForCircle(KHEPERAIV_MASS,
+                                 //                    0.0f,
+                                 //                    KHEPERAIV_GRIPPER_RING_RADIUS + KHEPERAIV_GRIPPER_RING_RADIUS,
+                                 //                    cpvzero)));
+                                 cpMomentForPoly(KHEPERAIV_MASS,
+                                    4,
+                                    bodyBoundingVert,
+                                    cpvzero)));
+
+
       m_ptActualGripperBody->p = cpv(cPosition.GetX(), cPosition.GetY());
       cpBodySetAngle(m_ptActualGripperBody,
                      cZAngle.GetValue() +
                      m_CKheperaIVEntity.GetTurretEntity().GetRotation().GetValue());
       /* Create the gripper shape vector */
       cpVect boundingVert[] = {
-         cpv(-0.001, -0.01),
-         cpv(-0.001,  0.01),
-         cpv( 0.001,  0.01),
-         cpv( 0.001, -0.01)
+         cpv(-0.001, -0.001),
+         cpv(-0.001,  0.001),
+         cpv( 0.001,  0.001),
+         cpv( 0.001, -0.001)
       };
       /* Create the actual gripper shape */
       cpShape* ptGripperShape = 
          cpSpaceAddShape(GetDynamics2DEngine().GetPhysicsSpace(),
                          cpPolyShapeNew(m_ptActualGripperBody,
-                                          // 0.01f,
+                                          // x0.01f,
                                           // KHEPERAIV_GRIPPER_RING_RADIUS,
                                           // cpv(KHEPERAIV_GRIPPER_RING_RADIUS, 0.001f)));
                                           // ));
@@ -386,8 +411,8 @@ namespace argos {
       if(m_pcGripper->GetConstraint()){
          cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
          printf("restLength = %.3f\n", ptSpring->restLength);
-         printf("anchor1 = %.3f,%.3f\n", ptSpring->anchr1.x,ptSpring->anchr1.y);
-         printf("anchor2 = %.3f,%.3f\n", ptSpring->anchr2.x,ptSpring->anchr2.y);
+         // printf("anchor1 = %.3f,%.3f\n", ptSpring->anchr1.x,ptSpring->anchr1.y);
+         // printf("anchor2 = %.3f,%.3f\n", ptSp   ring->anchr2.x,ptSpring->anchr2.y);
 
       }
    }

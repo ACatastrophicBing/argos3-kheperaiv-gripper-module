@@ -11,10 +11,10 @@
  * \todo     Save all the information that we send to the gripper turret in here on variables maybes?
  */
 #include <khepera/khepera.h>
-#include <khepera/i2ccom.h>
 #include "cgripperI2C.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <khepera/i2ccom.h>
 
 int i2c_read16( i2c_t * i2c ,
 		i2c_dev_t dev ,
@@ -45,7 +45,7 @@ char *devpath = NULL;// might default to correct devpath, but unsure
 int status;
 
 /* Address of our gripper module */
-int addr = 0x24;
+int addr = 0x35;
 // float m_PI = 3.14159265359;
 
 int cgripper_init( void ){

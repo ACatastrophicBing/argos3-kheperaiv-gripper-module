@@ -167,10 +167,11 @@ endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 # Create Gripper Helper Class
 #
 # if(ARGOS_BUILD_FOR STREQUAL "khiv")
-# add_library(cgripperI2C SHARED real_robot/cgripperI2C.c)
-# target_link_libraries(cgripperI2C -lkhepera)
-# endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 
+# add_library(gripper_lib real_robot/cgripperI2C.c)
+# target_link_libraries(argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv gripper_lib)
+
+# endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 #
 # Installation
 #

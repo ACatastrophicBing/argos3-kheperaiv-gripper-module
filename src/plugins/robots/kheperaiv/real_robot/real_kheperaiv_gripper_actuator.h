@@ -7,7 +7,7 @@
 using namespace argos;
 
 class CRealKheperaIVGripperActuator :
-   public CCI_GripperActuator,
+   public CCI_KheperaIVGripperActuator,
    public CRealKheperaIVDevice {
 
 public:

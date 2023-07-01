@@ -18,7 +18,8 @@ function init() {
  		gripped = 0
     failure = 0
     turret_enable()
-    forward_steps = 20
+    forward_steps = 10
+		right_steps = 10
 }
 
 # This function is executed at each time step
@@ -40,22 +41,19 @@ function step() {
       	#log("Object Released")
  	      gripper_unlock()
         set_wheels_debug(L_wheel, R_wheel)
+				right_steps = 10
     	} else {
+				if(right_steps > 0){
      	  L_wheel = -5.0
-      	R_wheel = -5.0
+      	R_wheel = 5.0
+				right_steps = right_steps - 1		
+				} else {
+					L_wheel = 5.0
+      		R_wheel = 5.0
+				}
         set_wheels_debug(L_wheel, R_wheel)
     	}
-		} else {
-			log("setting gripping")
-	    set_wheels_debug(0.0, 0.0)
-	    L_wheel = 0.0
-	    R_wheel = 0.0
- 	    gripper_lock()
-      gripped = 1
-      log("Object Gripped")
-      set_wheels_debug(L_wheel, R_wheel)
-      #turret_disable()
-    }
+		}
 	}
    
 }

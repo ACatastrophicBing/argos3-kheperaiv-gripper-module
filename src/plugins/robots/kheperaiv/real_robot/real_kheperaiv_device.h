@@ -3,6 +3,7 @@
 
 #include <argos3/core/utility/datatypes/datatypes.h>
 #include <khepera/khepera.h>
+#include "cgripperI2C.h"
 
 using namespace argos;
 
