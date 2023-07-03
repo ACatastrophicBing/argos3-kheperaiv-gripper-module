@@ -407,14 +407,13 @@ namespace argos {
             CRadians(m_ptActualBaseBody->a)),
          CVector3::Z);
       printf("Turret Location is (%f, %f)\n",m_ptActualGripperBody->p.x,m_ptActualGripperBody->p.y);
-      printf("Gripper Location is (%f, %f)\n",m_cGripperEntity);
+      // printf("Gripper Location is (%f, %f)\n",m_cGripperEntity);
       if(m_pcGripper->GetConstraint()){
          cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
          printf("restLength = %.3f\n", ptSpring->restLength);
          printf("anchor1 = %.3f,%.3f\n", ptSpring->anchr1.x,ptSpring->anchr1.y);
          printf("anchor2 = %.3f,%.3f\n", ptSpring->anchr2.x,ptSpring->anchr2.y);
-         printf("\n");
-
+         // printf("anchor1 cpDampedSpring force = %.4f\n", ptSpring->springForceFunc);
       }
    }
 

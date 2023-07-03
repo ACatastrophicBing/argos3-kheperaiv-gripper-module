@@ -32,29 +32,25 @@ function step() {
     set_wheels_debug(L_wheel, R_wheel)
     log("Going Forward")
   } else{
-    if(gripped > 0){
-			if (proximity[3].value > 0.6){
-	      set_wheels_debug(0.0, 0.0)
-	      L_wheel = 0.0
-	      R_wheel = 0.0
-     	  gripped = 1
-      	#log("Object Released")
- 	      gripper_unlock()
-        set_wheels_debug(L_wheel, R_wheel)
-				right_steps = 10
+    if(gripped == 0){
+#			if (proximity[3].value > 0.6){
+	#      set_wheels_debug(0.0, 0.0)
+	 #     L_wheel = 0.0
+	  #    R_wheel = 0.0
+     #	  gripped = 1
+ 	      gripper_lock()
+				log("Gripped Object")
+     #   set_wheels_debug(L_wheel, R_wheel)
+		#		right_steps = 10
+				gripped = 1
     	} else {
-				if(right_steps > 0){
+				log("Going Backwards")
      	  L_wheel = -5.0
-      	R_wheel = 5.0
-				right_steps = right_steps - 1		
-				} else {
-					L_wheel = 5.0
-      		R_wheel = 5.0
-				}
+      	R_wheel = -5.0
         set_wheels_debug(L_wheel, R_wheel)
-    	}
-		}
+		#}
 	}
+}
    
 }
 
