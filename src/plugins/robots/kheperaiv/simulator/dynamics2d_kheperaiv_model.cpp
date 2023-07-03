@@ -411,8 +411,9 @@ namespace argos {
       if(m_pcGripper->GetConstraint()){
          cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
          printf("restLength = %.3f\n", ptSpring->restLength);
-         // printf("anchor1 = %.3f,%.3f\n", ptSpring->anchr1.x,ptSpring->anchr1.y);
-         // printf("anchor2 = %.3f,%.3f\n", ptSp   ring->anchr2.x,ptSpring->anchr2.y);
+         printf("anchor1 = %.3f,%.3f\n", ptSpring->anchr1.x,ptSpring->anchr1.y);
+         printf("anchor2 = %.3f,%.3f\n", ptSpring->anchr2.x,ptSpring->anchr2.y);
+         printf("\n");
 
       }
    }
