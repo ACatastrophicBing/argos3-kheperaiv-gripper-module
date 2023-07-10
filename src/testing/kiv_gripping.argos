@@ -49,7 +49,7 @@
         <positioning         implementation="default" />
       </sensors>
       
-      <params>
+      <params bytecode_file="pull_grip_test.bo" debug_file="pull_grip_test.bdb">
         <wheel_turning hard_turn_angle_threshold="90"
                        soft_turn_angle_threshold="70"
                        no_turn_angle_threshold="10"

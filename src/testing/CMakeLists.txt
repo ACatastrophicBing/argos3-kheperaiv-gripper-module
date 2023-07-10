@@ -9,3 +9,4 @@ target_link_libraries(kheperaiv_diffusion
   argos3core_${ARGOS_BUILD_FOR}
   argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv
   argos3plugin_${ARGOS_BUILD_FOR}_genericrobot)
+
