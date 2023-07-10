@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <khepera/i2ccom.h>
-#include <sstream>
 
 int i2c_read16( i2c_t * i2c ,
 		i2c_dev_t dev ,
@@ -80,23 +79,17 @@ unsigned short cgripper_Turret_Get_Position(){
 	/*
 	 * Turret Position in Encoder Counts
 	*/
-	char pkg;
-	status = i2c_read16(&i2c,addr,TURRET_GET_POSITION,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Position;
-    ss >> Position;
-	return Position;
+	char Position;
+	status = i2c_read16(&i2c,addr,TURRET_GET_POSITION,&Position);
+	return (unsigned short) Position;
 }
 unsigned short cgripper_Turret_Get_Raw_Position(){
 	/*
 	 * Turret Position RAW in PWM Pulse width waveform
 	*/
-	char pkg;
-	status = i2c_read16(&i2c,addr,RAW_TURRET_POSITION,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Position;
-    ss >> Position;
-	return Position;
+	char Position;
+	status = i2c_read16(&i2c,addr,RAW_TURRET_POSITION,&Position);
+	return (unsigned short) Position;
 }
 
 void cgripper_Turret_Set_Position(unsigned short pos){
@@ -111,12 +104,9 @@ unsigned short cgripper_Turret_Get_Speed(){
 	/*
 	 * Returns speed of turret in frequency units
 	*/
-	char pkg;
-	status = i2c_read16(&i2c,addr,TURRET_SPEED,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Speed;
-    ss >> Speed;
-	return Speed;
+	char Speed;
+	status = i2c_read16(&i2c,addr,TURRET_SPEED,&Speed);
+	return (unsigned short) Speed;
 }
 
 void cgripper_Turret_Set_Speed(unsigned short speed){
@@ -127,13 +117,10 @@ void cgripper_Turret_Set_Speed(unsigned short speed){
 }
 
 unsigned short cgripper_Turret_Get_Max_Speed(){
-	char pkg;
+	char Max_Speed;
 //	knet_read8( dev , TURRET_MAX_SPEED , &Max_Speed );
-	status = i2c_read16(&i2c,addr,TURRET_MAX_SPEED,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Max_Speed;
-    ss >> Max_Speed;
-	return Max_Speed;
+	status = i2c_read16(&i2c,addr,TURRET_MAX_SPEED,&Max_Speed);
+	return (unsigned short) Max_Speed;
 }
 
 void cgripper_Turret_Set_Max_Speed( unsigned short Max_Speed){
@@ -143,13 +130,10 @@ void cgripper_Turret_Set_Max_Speed( unsigned short Max_Speed){
 
 /* Degree Error Information */
 unsigned short cgripper_Turret_Get_Max_Tolerance(){
-	char pkg;
+	char Max_Tolerance;
 //	knet_read8( dev , TURRET_MAX_TOLERANCE , &Max_Tolerance );
-	status = i2c_read16(&i2c,addr,TURRET_MAX_TOLERANCE,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Max_Tolerance;
-    ss >> Max_Tolerance;
-	return Max_Tolerance;
+	status = i2c_read16(&i2c,addr,TURRET_MAX_TOLERANCE,&Max_Tolerance);
+	return (unsigned short) Max_Tolerance;
 }
 
 void cgripper_Turret_Set_Max_Tolerance( unsigned short Max_Tolerance){
@@ -229,12 +213,9 @@ unsigned short cgripper_Gripper_Get_Position(){
 	 * where the gripper is? Did you NOT keep track of it yourself? 
 	 * Welp this returns 1 if open, 0 if closed
 	*/
-	char pkg;
-	i2c_read16(&i2c,addr,CGRIPPER_POSITION,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Position;
-    ss >> Position;
-	return Position;
+	char Position;
+	i2c_read16(&i2c,addr,CGRIPPER_POSITION,&Position);
+	return (unsigned short) Position;
 }
 
 void cgripper_Open_Gripper(){
@@ -260,34 +241,25 @@ void cgripper_Gripper_Set_Position( unsigned short Position){
 /**********************************************/
 
 unsigned short cgripper_ForceSensor_Get_Parallel_Force(){
-	char pkg;
+	char Force;
 //	knet_read8( dev , FORCE_SENSOR_FORCE , &Force );
-	i2c_read16(&i2c,addr,FORCE_SENSOR_PARALLEL,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Force;
-    ss >> Force;
-	return Force;
+	i2c_read16(&i2c,addr,FORCE_SENSOR_PARALLEL,&Force);
+	return (unsigned short) Force;
 }
 unsigned short cgripper_ForceSensor_Get_Perpendicular_Force(){
-	char pkg;
+	char Force;
 //	knet_read8( dev , FORCE_SENSOR_FORCE , &Force );
-	i2c_read16(&i2c,addr,FORCE_SENSOR_PERPENDICULAR,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Force;
-    ss >> Force;
-	return Force;
+	i2c_read16(&i2c,addr,FORCE_SENSOR_PERPENDICULAR,&Force);
+	return (unsigned short) Force;
 }
 
 /**********************************************/
 /******************LED Functions***************/
 /**********************************************/
 unsigned short cgripper_LEDRing_Get_Config(){
-	char pkg;
-	i2c_read16(&i2c,addr,LED_CONFIG,&pkg);
-	std::stringstream ss(pkg);
-	unsigned short Config;
-    ss >> Config;
-	return Config;
+	char Config;
+	i2c_read16(&i2c,addr,LED_CONFIG,&Config);
+	return (unsigned short) Config;
 
 }
 void cgripper_LEDRing_Set_Status( unsigned short Config){

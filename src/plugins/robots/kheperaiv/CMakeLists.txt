@@ -182,10 +182,7 @@ endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 # target_link_libraries(cgripperI2C -lkhepera)
 
 # add_library(gripper_lib MODULE real_robot/cgripperI2C.c real_robot/cgripperI2C.h)
-# target_link_libraries(gripper_lib 
-#   # ${BUZZ_LIBRARY}
-#   # ${ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV}
-#   # ${ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_REALROBOT}
+# target_link_libraries(gripper_lib
 #   # argos3core_${ARGOS_BUILD_FOR}
 #   # argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv
 #   # argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
