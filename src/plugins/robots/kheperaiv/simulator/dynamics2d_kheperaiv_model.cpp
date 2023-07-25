@@ -413,7 +413,7 @@ namespace argos {
          printf("restLength = %.3f\n", ptSpring->restLength);
          printf("anchor1 = %.3f,%.3f\n", ptSpring->anchr1.x,ptSpring->anchr1.y);
          printf("anchor2 = %.3f,%.3f\n", ptSpring->anchr2.x,ptSpring->anchr2.y);
-         printf("anchor1 cpDampedSpring force = %.4f\n", ptSpring->springForceFunc);
+         printf("anchor1 cpDampedSpring force = %f\n", ptSpring->springForceFunc(m_pcGripper->GetConstraint(), ptSpring->restLength));
       }
    }
 
