@@ -71,7 +71,7 @@
     /*
      * Change radians into encoders
     */
-      unsigned short sEncoderCount = (unsigned short) c_angle.GetValue() / 3.1415 * 44690;
+      unsigned short sEncoderCount = (unsigned short) c_angle.GetValue() / 3.1415 * 44690 / 2; // /2 because I think the turret only goes from - to 44690
       cgripper_Gripper_Set_Position(sEncoderCount);
    }
 

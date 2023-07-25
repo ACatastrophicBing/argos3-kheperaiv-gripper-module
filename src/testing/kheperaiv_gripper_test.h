@@ -101,6 +101,8 @@ private:
     * It is set to [-alpha,alpha]. */
    CRange<CRadians> m_cGoStraightAngleRange;
 
+   int counter;
+
 };
 
 #endif
