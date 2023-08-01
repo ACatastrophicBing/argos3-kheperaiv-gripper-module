@@ -1,0 +1,51 @@
+# Selected these just because they seemed to work 
+# and exhibit the correct behavior
+# I never changed the hw8.argos file, so this is the only file I included.
+
+MAX_SPEED = 10.0
+MIN_SPEED = -MAX_SPEED
+
+function set_wheels_debug(Left, Right){
+	#log(id, " speeds: ", Left, " " , Right)
+	set_wheels(Left, Right)
+	#debug.print("i: ", L_increase, " ", R_increase, "; s: ", Left, " ", Right, "; a: ", AngleToGoal)
+}
+
+# This function is executed once at init time
+function init() {
+    log("Initializing the Robot")
+    math.rng.setseed(id)
+	log("Enabling Turret")
+    turret_enable()
+	log("Closing Gripper")
+	gripper_lock()
+	flipper = 0
+}
+
+# This function is executed at each time step
+# The main loop is controller by ARGoS
+function step() {
+  if(flipper < 50){
+	turret_set(3.1415)
+  } else{
+	turret_set(0)
+  }
+  flipper = flipper + 1
+  if(flipper > 100){
+	flipper = 0
+  }
+}
+
+
+# This function is executed when you press the reset button
+function reset() {
+	turret_set(0)
+	gripper_unlock()
+}
+
+# This function is executed once when you close the simulator
+function destroy() {
+	log("Powering down, opening gripper and disabling turret")
+	gripper_unlock()
+	turret_disable()
+}
