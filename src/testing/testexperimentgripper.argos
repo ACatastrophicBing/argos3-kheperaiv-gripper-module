@@ -16,7 +16,7 @@
   <!-- *************** -->
   <controllers>
 
-    <kheperaiv_diffusion_controller id="khivgt"
+    <kheperaiv_gripper_test_controller id="khivgt"
                                library="build/testing/libkheperaiv_gripper">
       <actuators>
         <differential_steering implementation="default" />
@@ -29,7 +29,7 @@
         <kheperaiv_ultrasound implementation="default" show_rays="false" />
       </sensors>
       <params alpha="7.5" delta="0.1" velocity="5" />
-    </kheperaiv_diffusion_controller>
+    </kheperaiv_gripper_test_controller>
 
   </controllers>
 
