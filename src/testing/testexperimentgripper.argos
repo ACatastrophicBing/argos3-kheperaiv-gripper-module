@@ -27,6 +27,7 @@
         <differential_steering implementation="default" />
         <kheperaiv_proximity implementation="default" show_rays="false" />
         <kheperaiv_ultrasound implementation="default" show_rays="false" />
+        <kheperaiv_turret      implementation="default" />
       </sensors>
       <params alpha="7.5" delta="0.1" velocity="5" />
     </kheperaiv_gripper_test_controller>

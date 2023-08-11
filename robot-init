@@ -1,0 +1,19 @@
+# Necessary libraries:
+
+docker run -it -v $(pwd):/work nestlab/kheperaiv bash -l
+
+#battery don't remember where that one is probably already on robot
+cd /argos3/build_kheperaiv/plugins/robots/generic
+cp *.so /work/test/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv
+cd
+cd /work/argos3/build_kheperaiv/core/
+cp *.so /work/test/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv
+cd
+cd /work/buzz/build_kheperaiv/buzz/
+cp libbuzz.so /work/test/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv
+cp libbuzzdbg.so /work/test/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv
+cd /argos
+cp *.so /work/test/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv
+cd
+cd /home/julian/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv
+cp battery /work/test/argos3-kheperaiv-gripper-module/build_robot/plugins/robots/kheperaiv

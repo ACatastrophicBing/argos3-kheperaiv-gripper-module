@@ -82,9 +82,15 @@ void CKheperaIVGripping::ControlStep() {
    if(counter < 50){
       m_pcTurret->SetRotation(CRadians::PI);
       m_pcGripper->Lock();
+      RLOG << "Test: "
+   << "turning" 
+   << std::endl;
    } else{
       m_pcTurret->SetRotation(CRadians::ZERO);
       m_pcGripper->Unlock();
+      RLOG << "Test: "
+   << "not turning=" << counter
+   << std::endl;
    }
    counter = counter +1; // Literally bare bones keep it as simple as possible
 }
