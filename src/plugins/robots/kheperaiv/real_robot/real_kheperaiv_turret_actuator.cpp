@@ -1,10 +1,11 @@
 /**
  * @file <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_turret_actuator.cpp>
  *
- * @author Chandler Garcia & Yasmine Aoua
+ * @author Chandler Garcia
  */
 
 #include "real_kheperaiv_turret_actuator.h"
+#include <argos3/core/utility/logging/argos_log.h>
 // #include "cgripperI2C.c"
 
   /****************************************/
@@ -71,6 +72,7 @@
     /*
      * Change radians into encoders
     */
+      LOG << "Setting rotation to /" << c_angle << std::endl;
       unsigned short sEncoderCount = (unsigned short) c_angle.GetValue() / 3.1415 * 44690;
       cgripper_Gripper_Set_Position(sEncoderCount);
    }
