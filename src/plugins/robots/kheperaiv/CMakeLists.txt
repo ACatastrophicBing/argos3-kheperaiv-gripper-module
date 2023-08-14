@@ -113,7 +113,7 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
   set(ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV
     ${ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV}
     ${ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_REALROBOT}
-    real_robot/cgripperI2C.cpp
+    real_robot/cgripperI2C.c
     real_robot/real_kheperaiv.cpp
     real_robot/real_kheperaiv_device.cpp
     real_robot/real_kheperaiv_differential_steering_device.cpp
