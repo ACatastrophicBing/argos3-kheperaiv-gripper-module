@@ -31,6 +31,7 @@ void CRealKheperaIVTurretGripperActuator::Lock(){
 
 
 void CRealKheperaIVTurretGripperActuator::Unlock(){
+   printf("Real robot has released grip\n");
    cgripper_Open_Gripper();
 }
 
