@@ -4,7 +4,7 @@
 #include <argos3/plugins/robots/kheperaiv/real_robot/real_kheperaiv_device.h>
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_gripper_actuator.h>
 #include <argos3/core/utility/math/vector2.h>
-#include "cgripperI2C.h"
+// #include "cgripperI2C.h"
 
 using namespace argos;
 

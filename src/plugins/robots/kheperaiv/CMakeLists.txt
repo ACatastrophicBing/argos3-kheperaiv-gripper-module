@@ -153,7 +153,7 @@ else(ARGOS_BUILD_FOR_SIMULATOR)
     -lkhepera)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 if(BUZZ_FOUND)
-  target_link_libraries(argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv argos3plugin_${ARGOS_BUILD_FOR}_buzz ${BUZZ_LIBRARY})
+  target_link_libraries(argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv argos3plugin_${ARGOS_BUILD_FOR}_buzz ${ _LIBRARY})
 endif(BUZZ_FOUND)
 
 #
