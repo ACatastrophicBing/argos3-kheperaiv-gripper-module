@@ -16,21 +16,26 @@
   <!-- *************** -->
   <controllers>
 
-    <kheperaiv_gripper_test_controller id="khivgt"
-                               library="build/testing/libkheperaiv_gripper">
+    <buzz_controller_kheperaiv id="khivbzgrp">
       <actuators>
         <differential_steering implementation="default" />
-        <kheperaiv_gripper     implementation="default" show_rays="true" />
+        <kheperaiv_gripper     implementation="default"/>
         <kheperaiv_turret      implementation="default" />
+        <range_and_bearing     implementation="default" />
       </actuators>
       <sensors>
         <differential_steering implementation="default" />
-        <kheperaiv_proximity implementation="default" show_rays="false" />
-        <kheperaiv_ultrasound implementation="default" show_rays="false" />
+        <kheperaiv_proximity  implementation="default" show_rays="true" />
         <kheperaiv_turret      implementation="default" />
+        <kheperaiv_ultrasound implementation="default" show_rays="false" />
       </sensors>
-      <params alpha="7.5" delta="0.1" velocity="5" />
-    </kheperaiv_gripper_test_controller>
+      <params bytecode_file="gripper_test_0.bo" debug_file="gripper_test_0.bdb">
+        <wheel_turning hard_turn_angle_threshold="90"
+                       soft_turn_angle_threshold="70"
+                       no_turn_angle_threshold="10"
+                       max_speed="10" />
+      </params>
+    </buzz_controller_kheperaiv>
 
   </controllers>
 
@@ -38,6 +43,13 @@
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="5, 5, 1" center="0,0,0.5">
+
+    <light id="light0"
+           position="0,0,4"
+           orientation="0,0,0"
+           color="yellow"
+           intensity="10.0"
+           medium="light"/>
 
     <box id="wall_north" size="4,0.1,0.5" movable="false">
       <body position="0,2,0" orientation="0,0,0" />
@@ -52,12 +64,9 @@
       <body position="-2,0,0" orientation="0,0,0" />
     </box>
 
-    <!--
-       Only testing with a single robot initially
-    -->
     <kheperaiv id="kiv_0" rab_data_size="100">
       <body position="0,0,0" orientation="0,0,0" />
-      <controller config="khivgt" />
+      <controller config="sync" />
     </kheperaiv>
 
     <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
@@ -71,24 +80,20 @@
   <!-- ******************* -->
   <physics_engines>
     <dynamics2d id="dyn2d" />
-    <!-- <pointmass3d id="dyn2d" /> -->
   </physics_engines>
 
   <!-- ********* -->
   <!-- * Media * -->
   <!-- ********* -->
-  <media />
+  <media>
+  </media>
 
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
   <visualization>
     <qt-opengl>
-      <camera>
-        <placements>
-          <placement index="0" position="-1.37702,-1.04453,0.308332" look_at="-1.1334,-1.85855,-0.21895" up="0.15118,-0.505144,0.849691" lens_focal_length="20" />
-        </placements>
-      </camera>
+      <user_functions label="buzz_qt" />
     </qt-opengl>
   </visualization>
 

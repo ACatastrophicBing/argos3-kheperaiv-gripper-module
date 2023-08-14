@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
        */
       CRealKheperaIV* pcRobot = new CRealKheperaIV();
       pcRobot->Init(strARGoSFName, strControllerId);
+      LOGERR << "Maybe we initialized the robot and everything correctly, maybe we didn't" << std::endl;
       /*
        * Perform the main loop
        */

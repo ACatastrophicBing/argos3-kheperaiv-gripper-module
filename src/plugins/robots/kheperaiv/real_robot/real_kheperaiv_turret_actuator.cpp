@@ -49,14 +49,18 @@
     switch(e_mode){
       case MODE_OFF:
         cgripper_Turret_Disable();
+        printf("Turret off\n");
         break;
       case MODE_PASSIVE:
+        printf("Passive turret mode\n");
         cgripper_Turret_Disable();
         break;
       case MODE_SPEED_CONTROL:
+        printf("Speed turret mode\n");
         cgripper_Turret_Speed_Mode();
         break;
       case MODE_POSITION_CONTROL:
+        printf("Position turret mode\n");
         cgripper_Turret_Position_Mode();
         break;
       default:

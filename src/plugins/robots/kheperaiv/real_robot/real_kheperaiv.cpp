@@ -8,7 +8,7 @@
 #include "real_kheperaiv_lidar_sensor.h"
 #include "real_kheperaiv_proximity_sensor.h"
 #include "real_kheperaiv_ultrasound_sensor.h"
-// #include "real_kheperaiv_turret_gripper_actuator.h"
+#include "real_kheperaiv_turret_gripper_actuator.h"
 #include "real_kheperaiv_turret_actuator.h"
 #include "real_kheperaiv_turret_encoder_sensor.h"
 #include "real_kheperaiv_turret_force_sensor.h"
@@ -32,6 +32,7 @@ CRealKheperaIV::~CRealKheperaIV() {
 /****************************************/
 
 void CRealKheperaIV::InitRobot() {
+   LOG << "[INFO] The robot is being initialized properly" << std::endl;
    /* Initialize Khepera */
    if(kh4_init(0,NULL) != 0) {
       THROW_ARGOSEXCEPTION("Error initializing the Khepera IV subsystem (kh4_init)");
@@ -58,6 +59,10 @@ void CRealKheperaIV::Destroy() {
    kh4_SetRGBLeds(0,0,0,0,0,0,0,0,0, m_ptDSPic);
    /* Switch ultrasound sensor off */
    kh4_activate_us(0, m_ptDSPic);
+   /* Switch the Gripper open */
+   cgripper_Open_Gripper();
+   /* Set the turret to be able to be pushed around */
+   cgripper_Turret_Disable();
 }
 
 /****************************************/
@@ -76,8 +81,8 @@ CCI_Actuator* CRealKheperaIV::MakeActuator(const std::string& str_name) {
    MAKE_ACTUATOR(CRealKheperaIVDifferentialSteeringActuator,
                  "differential_steering");
    // MAKE_ACTUATOR(CRealKheperaIVGripperActuator, "gripper");
-   MAKE_ACTUATOR(CRealKheperaIVTurretGripperActuator, "gripper");
-   MAKE_ACTUATOR(CRealKheperaIVTurretActuator, "turret");
+   MAKE_ACTUATOR(CRealKheperaIVTurretGripperActuator, "kheperaiv_gripper");
+   MAKE_ACTUATOR(CRealKheperaIVTurretActuator, "kheperaiv_turret");
    MAKE_ACTUATOR(CRealKheperaIVLEDsActuator,
                  "leds");
    return NULL;
@@ -107,7 +112,7 @@ CCI_Sensor* CRealKheperaIV::MakeSensor(const std::string& str_name) {
    MAKE_SENSOR(CRealKheperaIVTurretForceSensor,
                "kheperaiv_force");
    MAKE_SENSOR(CRealKheperaIVTurretEncoderSensor,
-               "khepera_turret");
+               "kheperaiv_turret");
    MAKE_SENSOR(CRealKheperaIVLIDARSensor,
                "kheperaiv_lidar");
    MAKE_SENSOR(CRealKheperaIVProximitySensor,
