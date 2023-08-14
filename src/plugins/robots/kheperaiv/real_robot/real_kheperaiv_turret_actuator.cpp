@@ -48,14 +48,18 @@
     switch(e_mode){
       case MODE_OFF:
         cgripper_Turret_Disable();
+        printf("Turret off\n");
         break;
       case MODE_PASSIVE:
+        printf("Passive turret mode\n");
         cgripper_Turret_Disable();
         break;
       case MODE_SPEED_CONTROL:
+        printf("Speed turret mode\n");
         cgripper_Turret_Speed_Mode();
         break;
       case MODE_POSITION_CONTROL:
+        printf("Position turret mode\n");
         cgripper_Turret_Position_Mode();
         break;
       default:
@@ -71,6 +75,7 @@
     /*
      * Change radians into encoders
     */
+      printf("Trying to set turret rotation to %f", c_angle);
       unsigned short sEncoderCount = (unsigned short) c_angle.GetValue() / 3.1415 * 44690 / 2; // /2 because I think the turret only goes from - to 44690
       cgripper_Gripper_Set_Position(sEncoderCount);
    }

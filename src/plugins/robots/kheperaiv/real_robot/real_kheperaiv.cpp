@@ -8,7 +8,7 @@
 #include "real_kheperaiv_lidar_sensor.h"
 #include "real_kheperaiv_proximity_sensor.h"
 #include "real_kheperaiv_ultrasound_sensor.h"
-// #include "real_kheperaiv_turret_gripper_actuator.h"
+#include "real_kheperaiv_turret_gripper_actuator.h"
 #include "real_kheperaiv_turret_actuator.h"
 #include "real_kheperaiv_turret_encoder_sensor.h"
 #include "real_kheperaiv_turret_force_sensor.h"
@@ -32,6 +32,7 @@ CRealKheperaIV::~CRealKheperaIV() {
 /****************************************/
 
 void CRealKheperaIV::InitRobot() {
+   LOG << "[INFO] The robot is being initialized properly" << std::endl;
    /* Initialize Khepera */
    if(kh4_init(0,NULL) != 0) {
       THROW_ARGOSEXCEPTION("Error initializing the Khepera IV subsystem (kh4_init)");
@@ -58,6 +59,10 @@ void CRealKheperaIV::Destroy() {
    kh4_SetRGBLeds(0,0,0,0,0,0,0,0,0, m_ptDSPic);
    /* Switch ultrasound sensor off */
    kh4_activate_us(0, m_ptDSPic);
+   /* Switch the Gripper open */
+   cgripper_Open_Gripper();
+   /* Set the turret to be able to be pushed around */
+   cgripper_Turret_Disable();
 }
 
 /****************************************/
