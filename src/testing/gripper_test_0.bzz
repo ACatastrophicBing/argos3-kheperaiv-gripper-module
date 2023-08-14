@@ -25,6 +25,7 @@ function init() {
 # This function is executed at each time step
 # The main loop is controller by ARGoS
 function step() {
+  set_wheels_debug(-5,5)
   if(flipper < 50){
 	turret_set(3.1415)
   } else{
