@@ -153,7 +153,7 @@ else(ARGOS_BUILD_FOR_SIMULATOR)
     -lkhepera)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 if(BUZZ_FOUND)
-  target_link_libraries(argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv argos3plugin_${ARGOS_BUILD_FOR}_buzz ${ _LIBRARY})
+  target_link_libraries(argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv argos3plugin_${ARGOS_BUILD_FOR}_buzz ${BUZZ_LIBRARY})
 endif(BUZZ_FOUND)
 
 #
@@ -164,33 +164,8 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
   target_link_libraries(battery -lkhepera)
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 
-#
-# Create the helper .c file cgripperI2C.c
-#
-# add_library(gripper_lib STATIC real_robot/cgripperI2C.c real_robot/cgripperI2C.h)
-# target_link_libraries(gripper_lib 
-#   -lkhepera)
 
-#
-# Create Gripper Helper Class
-#
-# if(ARGOS_BUILD_FOR STREQUAL "khiv")
 
-# add_library(gripper_lib real_robot/cgripperI2C.c)
-
-# add_library(cgripperI2C STATIC real_robot/cgripperI2C.c real_robot/cgripperI2C.h)
-# target_link_libraries(cgripperI2C -lkhepera)
-
-# add_library(gripper_lib MODULE real_robot/cgripperI2C.c real_robot/cgripperI2C.h)
-# target_link_libraries(gripper_lib
-#   # argos3core_${ARGOS_BUILD_FOR}
-#   # argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv
-#   # argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
-#   -lkhepera)
-
-# target_link_libraries(argos3plugin_${ARGOS_BUILD_FOR}_kheperaiv gripper_lib)
-
-# endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 #
 # Installation
 #

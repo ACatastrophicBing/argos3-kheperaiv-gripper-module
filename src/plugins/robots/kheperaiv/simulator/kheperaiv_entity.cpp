@@ -90,7 +90,7 @@ namespace argos {
 
          /* TODO : Turret Equipped Entity Entity*/
          m_pcKheperaIVTurretEntity = new CKheperaIVTurretEntity(this, "turret_0", cTurretAnchor);
-         printf("The m_pcKheperaIVTurretEntity SHOULD have been added as a component, using nonstandard init\n");
+         printf("The m_pcKheperaIVTurretEntity has been added as a component, using nonstandard init\n");
          AddComponent(*m_pcKheperaIVTurretEntity);
          /* Gripper equipped entity */
          m_pcGripperEquippedEntity =
@@ -100,6 +100,7 @@ namespace argos {
                                        CVector3::X);
          AddComponent(*m_pcGripperEquippedEntity);
          /* The above code was taken directly from footbot */
+         printf("The m_pcGripperEquippedEntity has been added as a component\n");
 
          /* LED equipped entity */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
