@@ -18,7 +18,7 @@
    CRealKheperaIVDevice(pt_dspic) {
   // CRealKheperaIVTurretActuator::CRealKheperaIVTurretActuator() {
     /* Turret does nada, and if its position was changed while off, we don't want it to instantly turn on */
-    cgripper_Turret_Disable();
+    // cgripper_Turret_Disable();
   }
 
   CRealKheperaIVTurretActuator::~CRealKheperaIVTurretActuator(){
