@@ -48,6 +48,7 @@ void CKheperaIVGripping::Init(TConfigurationNode& t_node) {
    m_pcWheels           = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcEncoder          = GetSensor  <CCI_DifferentialSteeringSensor  >("differential_steering");
    m_pcProximity        = GetSensor  <CCI_KheperaIVProximitySensor    >("kheperaiv_proximity"  );
+   m_pcUltrasound       = GetSensor  <CCI_KheperaIVUltrasoundSensor   >("kheperaiv_ultrasound" );
    m_pcGripper          = GetActuator<CCI_KheperaIVGripperActuator    >("kheperaiv_gripper");
    m_pcTurret           = GetActuator<CCI_KheperaIVTurretActuator     >("kheperaiv_turret");
    m_pcTurretEncoder    = GetSensor  <CCI_KheperaIVTurretEncoderSensor>("kheperaiv_turret");
@@ -64,9 +65,11 @@ void CKheperaIVGripping::Init(TConfigurationNode& t_node) {
    GetNodeAttributeOrDefault(t_node, "delta", m_fDelta, m_fDelta);
    GetNodeAttributeOrDefault(t_node, "velocity", m_fWheelVelocity, m_fWheelVelocity);
 
-   m_pcTurret->SetMode(m_pcTurret->MODE_POSITION_CONTROL);
+   // m_pcTurret->SetMode(m_pcTurret->MODE_POSITION_CONTROL);
 
    counter = 0;
+
+   RLOG << "Initialized" << std::endl;
 }
 
 /****************************************/
@@ -93,13 +96,17 @@ void CKheperaIVGripping::ControlStep() {
    << std::endl;
    }
    counter = counter +1; // Literally bare bones keep it as simple as possible
+   m_pcWheels->SetLinearVelocity(10,10);
+
+   RLOG << "Running" << std::endl;
 }
 
 /****************************************/
 /****************************************/
 
 void CKheperaIVGripping::Destroy(){
-   m_pcTurret->SetMode(m_pcTurret->MODE_OFF);
+   // m_pcTurret->SetMode(m_pcTurret->MODE_OFF);
+   m_pcWheels->SetLinearVelocity(0,0);
 }
 
 /****************************************/

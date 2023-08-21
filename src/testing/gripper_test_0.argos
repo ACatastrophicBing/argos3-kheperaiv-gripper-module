@@ -21,7 +21,7 @@
         <differential_steering implementation="default" />
         <kheperaiv_gripper     implementation="default"/>
         <kheperaiv_turret      implementation="default" />
-        <range_and_bearing     implementation="default" />
+        <!-- <range_and_bearing     implementation="default" /> -->
       </actuators>
       <sensors>
         <differential_steering implementation="default" />

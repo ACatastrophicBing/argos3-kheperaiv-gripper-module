@@ -17,7 +17,7 @@
   <controllers>
 
     <kheperaiv_gripper_test_controller id="khivgt" 
-                               library="/home/julian/argos3-kheperaiv-gripper-module/build_sim/testing/libkheperaiv_gripper_test" >
+                               library="/home/midnightpegasus/kheperaiv/argos3-kheperaiv-gripper-module/build_sim/testing/libkheperaiv_gripper_test" >
       <actuators>
         <differential_steering implementation="default" />
         <kheperaiv_gripper     implementation="default" show_rays="true" />

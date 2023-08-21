@@ -90,7 +90,7 @@ namespace argos {
 
          /* TODO : Turret Equipped Entity Entity*/
          m_pcKheperaIVTurretEntity = new CKheperaIVTurretEntity(this, "turret_0", cTurretAnchor);
-         printf("The m_pcKheperaIVTurretEntity has been added as a component, using nonstandard init\n");
+         // printf("m_pcKheperaIVTurretEntity has been added as a component\n");
          AddComponent(*m_pcKheperaIVTurretEntity);
          /* Gripper equipped entity */
          m_pcGripperEquippedEntity =
@@ -100,7 +100,7 @@ namespace argos {
                                        CVector3::X);
          AddComponent(*m_pcGripperEquippedEntity);
          /* The above code was taken directly from footbot */
-         printf("The m_pcGripperEquippedEntity has been added as a component\n");
+         // printf("m_pcGripperEquippedEntity has been added as a component\n");
 
          /* LED equipped entity */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
@@ -128,6 +128,8 @@ namespace argos {
             new CProximitySensorEquippedEntity(this,
                                                "ultrasound");
          AddComponent(*m_pcUltrasoundSensorEquippedEntity);
+         // printf("m_pcUltrasoundSensorEquippedEntity has been added as a component\n");
+
          for(UInt32 i = 0; i < 5; ++i) {
             m_pcUltrasoundSensorEquippedEntity->AddSensor(
                CVector3(KHEPERAIV_ULTRASOUND_SENSORS_RING_RADIUS +
@@ -184,19 +186,27 @@ namespace argos {
                                    *m_pcEmbodiedEntity,
                                    CVector3(0.0f, 0.0f, KHEPERAIV_BASE_TOP));
          AddComponent(*m_pcRABEquippedEntity);
+         // printf("m_pcRABEquippedEntity has been added as a component\n");
+         
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0", str_bat_model);
          AddComponent(*m_pcBatteryEquippedEntity);
+
+         // printf("Attempting to create controllable entity\n");
          /* Controllable entity
             It must be the last one, for actuators/sensors to link to composing entities correctly */
          m_pcControllableEntity = new CControllableEntity(this, "controller_0");
+         printf("Attempting to add controllable entity\n");
          AddComponent(*m_pcControllableEntity);
+         printf("Attempting to set the controller name\n");
          m_pcControllableEntity->SetController(str_controller_id);
          /* Update components */
+         printf("Attempting to update componenets\n");
          UpdateComponents();
+         printf("All Components updated\n");
       }
       catch(CARGoSException& ex) {
-         THROW_ARGOSEXCEPTION_NESTED("Failed to initialize entity \"" << GetId() << "\".", ex);
+         THROW_ARGOSEXCEPTION_NESTED("In kheperaiv_entity.cpp: Failed to initialize entity \"" << GetId() << "\".", ex);
       }
    }
 

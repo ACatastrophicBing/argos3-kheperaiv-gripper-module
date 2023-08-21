@@ -12,6 +12,7 @@
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_turret_actuator.h>
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_turret_encoder_sensor.h>
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_gripper_actuator.h>
+#include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_ultrasound_sensor.h>
 
 /*
  * All the ARGoS stuff in the 'argos' namespace.
@@ -74,6 +75,8 @@ private:
    CCI_KheperaIVTurretEncoderSensor* m_pcTurretEncoder;
    /* Pointer to KheperaIV turret actuator */
    CCI_KheperaIVTurretActuator* m_pcTurret;
+
+   CCI_KheperaIVUltrasoundSensor* m_pcUltrasound;
 
 
 

@@ -11,10 +11,10 @@ namespace argos {
    class CBatteryEquippedEntity;
    class CControllableEntity;
    class CEmbodiedEntity;
-   class CGripperEquippedEntity; // We added this
+   class CGripperEquippedEntity;
    class CGroundSensorEquippedEntity;
    class CKheperaIVEntity;
-   class CKheperaIVTurretEntity; // We added this
+   class CKheperaIVTurretEntity;
    class CLEDEquippedEntity;
    class CLightSensorEquippedEntity;
    class CProximitySensorEquippedEntity;
