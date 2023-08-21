@@ -16,26 +16,21 @@
   <!-- *************** -->
   <controllers>
 
-    <buzz_controller_kheperaiv id="khivbzgrp">
+    <kheperaiv_gripper_test_controller id="khivgt" 
+                               library="/home/julian/argos3-kheperaiv-gripper-module/build_sim/testing/libkheperaiv_gripper_test" >
       <actuators>
         <differential_steering implementation="default" />
-        <kheperaiv_gripper     implementation="default"/>
+        <kheperaiv_gripper     implementation="default" show_rays="true" />
         <kheperaiv_turret      implementation="default" />
-        <range_and_bearing     implementation="default" />
       </actuators>
       <sensors>
         <differential_steering implementation="default" />
-        <kheperaiv_proximity  implementation="default" show_rays="true" />
-        <kheperaiv_turret      implementation="default" />
+        <kheperaiv_proximity implementation="default" show_rays="false" />
         <kheperaiv_ultrasound implementation="default" show_rays="false" />
+        <kheperaiv_turret      implementation="default" />
       </sensors>
-      <params bytecode_file="gripper_test_0.bo" debug_file="gripper_test_0.bdb">
-        <wheel_turning hard_turn_angle_threshold="90"
-                       soft_turn_angle_threshold="70"
-                       no_turn_angle_threshold="10"
-                       max_speed="10" />
-      </params>
-    </buzz_controller_kheperaiv>
+      <params alpha="7.5" delta="0.1" velocity="5" />
+    </kheperaiv_gripper_test_controller>
 
   </controllers>
 
@@ -43,13 +38,6 @@
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="5, 5, 1" center="0,0,0.5">
-
-    <!-- <light id="light0"
-           position="0,0,4"
-           orientation="0,0,0"
-           color="yellow"
-           intensity="10.0"
-           medium="light"/> -->
 
     <box id="wall_north" size="4,0.1,0.5" movable="false">
       <body position="0,2,0" orientation="0,0,0" />
@@ -64,12 +52,15 @@
       <body position="-2,0,0" orientation="0,0,0" />
     </box>
 
+    <!--
+       Only testing with a single robot initially
+    -->
     <!-- <kheperaiv id="kiv_0" rab_data_size="100">
       <body position="0,0,0" orientation="0,0,0" />
-      <controller config="sync" />
-    </kheperaiv>
+      <controller config="khivgt" />
+    </kheperaiv> -->
 
-    <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
+    <!-- <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
       <body position="0.1850,0,0" orientation="0,0,0" />
     </cylinder> -->
 
@@ -84,7 +75,7 @@
         <vicon_updater/>
       </updaters>
       <assigners>
-        <Khepera default="khivbzgrp"/>
+        <Khepera default="khivgt"/>
       </assigners>
     </tracking>
   </physics_engines>
@@ -92,8 +83,7 @@
   <!-- ********* -->
   <!-- * Media * -->
   <!-- ********* -->
-  <media>
-  </media>
+  <media />
 
   <!-- ****************** -->
   <!-- * Visualization * -->

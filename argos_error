@@ -1,0 +1,9 @@
+The m_pcKheperaIVTurretEntity has been added as a component, using nonstandard init
+The m_pcGripperEquippedEntity has been added as a component
+[FATAL] Failed to initialize entity "Khepera_9".
+[FATAL] Can't set controller for controllable entity "controller_0"
+[FATAL] Symbol "kheperaiv_turret (default)" not found
+QObject::connect: Cannot queue arguments of type 'QTextCursor'
+(Make sure 'QTextCursor' is registered using qRegisterMetaType().)
+Segmentation fault (core dumped)
+

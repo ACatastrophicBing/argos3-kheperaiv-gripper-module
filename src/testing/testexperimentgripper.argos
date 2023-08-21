@@ -5,8 +5,8 @@
   <!-- * General configuration * -->
   <!-- ************************* -->
   <framework>
-    <system threads="0" />
-    <experiment length="600"
+    <!-- <system threads="0" /> -->
+    <experiment length="0"
                 ticks_per_second="10"
                 random_seed="124" />
   </framework>
@@ -16,8 +16,8 @@
   <!-- *************** -->
   <controllers>
 
-    <kheperaiv_gripper_test_controller id="khivgt"
-                               library="build/testing/libkheperaiv_gripper">
+    <kheperaiv_gripper_test_controller id="khivgt" 
+                               library="/home/julian/argos3-kheperaiv-gripper-module/build_sim/testing/libkheperaiv_gripper_test" >
       <actuators>
         <differential_steering implementation="default" />
         <kheperaiv_gripper     implementation="default" show_rays="true" />
@@ -55,14 +55,14 @@
     <!--
        Only testing with a single robot initially
     -->
-    <kheperaiv id="kiv_0" rab_data_size="100">
+    <!-- <kheperaiv id="kiv_0" rab_data_size="100">
       <body position="0,0,0" orientation="0,0,0" />
       <controller config="khivgt" />
-    </kheperaiv>
+    </kheperaiv> -->
 
-    <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
+    <!-- <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
       <body position="0.1850,0,0" orientation="0,0,0" />
-    </cylinder>
+    </cylinder> -->
 
   </arena>
 
@@ -70,8 +70,14 @@
   <!-- * Physics engines * -->
   <!-- ******************* -->
   <physics_engines>
-    <dynamics2d id="dyn2d" />
-    <!-- <pointmass3d id="dyn2d" /> -->
+    <tracking>
+      <updaters>
+        <vicon_updater/>
+      </updaters>
+      <assigners>
+        <Khepera default="khivgt"/>
+      </assigners>
+    </tracking>
   </physics_engines>
 
   <!-- ********* -->
@@ -91,5 +97,9 @@
       </camera>
     </qt-opengl>
   </visualization>
+
+  <loop_functions label="MasterLoopFunctions">
+    <sub_loop_function label="BaseNetworking" />
+  </loop_functions>
 
 </argos-configuration>
