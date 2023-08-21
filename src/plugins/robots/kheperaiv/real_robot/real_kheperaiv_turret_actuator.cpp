@@ -77,7 +77,7 @@
      * Change radians into encoders
     */
       LOG << "[TURRET] Setting rotation to /" << c_angle << std::endl;
-      unsigned short sEncoderCount = (unsigned short) c_angle.GetValue() / 3.1415 * 44690;
+      unsigned short sEncoderCount = (unsigned short) (c_angle.GetValue() - CRadians:PI) / CRadians:PI * 44690;
       LOG << "[TURRET] The current encoder count send message is /" << sEncoderCount << std::endl;
       cgripper_Gripper_Set_Position(sEncoderCount);
    }
