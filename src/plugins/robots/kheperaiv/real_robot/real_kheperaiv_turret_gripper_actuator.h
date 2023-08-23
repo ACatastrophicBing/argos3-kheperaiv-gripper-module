@@ -42,7 +42,7 @@ public:
 
    
 private:
-
+   EGripModes m_eGrip;
    
 
 };

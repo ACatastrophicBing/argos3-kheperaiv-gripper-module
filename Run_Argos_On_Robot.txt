@@ -1,0 +1,8 @@
+To run an argos file on the robot
+First run
+export LD_LIBRARY_PATH=~/julian
+to properly source the path
+
+And then this
+./kheperaiv_gripper_test -c testexperimentgripper.argos -i khivgt
+To run any code (Note, this code is using a shared c library, not buzz

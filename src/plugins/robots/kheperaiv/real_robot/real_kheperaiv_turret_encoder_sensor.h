@@ -32,7 +32,7 @@ private:
 
    CRadians m_cRotation;
 
-   unsigned short m_nTurretEncoder;
+   unsigned short m_unTurretEncoder;
    Real m_fTurretEncoderDegrees;
 
 };

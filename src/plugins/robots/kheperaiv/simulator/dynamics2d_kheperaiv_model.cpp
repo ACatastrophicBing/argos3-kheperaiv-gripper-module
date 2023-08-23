@@ -41,6 +41,11 @@ namespace argos {
       MODE_POSITION_CONTROL,
    };
 
+   enum EGripModes {
+      MODE_OPEN = 0,
+      MODE_CLOSED = 1
+   };
+
    /****************************************/
    /****************************************/
 
@@ -63,7 +68,6 @@ namespace argos {
       RegisterAnchorMethod<CDynamics2DKheperaIVModel>(
          GetEmbodiedEntity().GetOriginAnchor(),
          &CDynamics2DKheperaIVModel::UpdateOriginAnchor);
-
       RegisterAnchorMethod<CDynamics2DKheperaIVModel>(
          GetEmbodiedEntity().GetAnchor("turret"),
          &CDynamics2DKheperaIVModel::UpdateTurretAnchor);
@@ -96,13 +100,13 @@ namespace argos {
       /* Create the actual body shape */
       m_ptBaseShape =
          cpSpaceAddShape(GetDynamics2DEngine().GetPhysicsSpace(),
-                        //  cpCircleShapeNew(m_ptActualBaseBody, // actual robot
-                        //                   KHEPERAIV_GRIPPER_RING_RADIUS,
-                        //                   cpvzero));
-                        cpPolyShapeNew(m_ptActualBaseBody,
-                        4,
-                        bodyBoundingVert,
-                        cpvzero));
+                         cpCircleShapeNew(m_ptActualBaseBody, // actual robot
+                                          KHEPERAIV_GRIPPER_RING_RADIUS,
+                                          cpvzero));
+                        // cpPolyShapeNew(m_ptActualBaseBody,
+                        // 4,
+                        // bodyBoundingVert,
+                        // cpvzero));
       m_ptBaseShape->e = 0.0; // No elasticity
       m_ptBaseShape->u = 0.7; // Lots of friction
       /* This shape is grippable */
@@ -119,14 +123,14 @@ namespace argos {
       m_ptActualGripperBody =
          cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(),
                         cpBodyNew(KHEPERAIV_MASS / 2.0, // TODO Find what the actual weight of the module is
-                                 //  cpMomentForCircle(KHEPERAIV_MASS,
-                                 //                    0.0f,
-                                 //                    KHEPERAIV_GRIPPER_RING_RADIUS + KHEPERAIV_GRIPPER_RING_RADIUS,
-                                 //                    cpvzero)));
-                                 cpMomentForPoly(KHEPERAIV_MASS,
-                                    4,
-                                    bodyBoundingVert,
-                                    cpvzero)));
+                                  cpMomentForCircle(KHEPERAIV_MASS,
+                                                    0.0f,
+                                                    KHEPERAIV_GRIPPER_RING_RADIUS + KHEPERAIV_GRIPPER_RING_RADIUS,
+                                                    cpvzero)));
+                                 // cpMomentForPoly(KHEPERAIV_MASS,
+                                 //    4,
+                                 //    bodyBoundingVert,
+                                 //    cpvzero)));
 
 
       m_ptActualGripperBody->p = cpv(cPosition.GetX(), cPosition.GetY());
@@ -135,10 +139,10 @@ namespace argos {
                      m_CKheperaIVEntity.GetTurretEntity().GetRotation().GetValue());
       /* Create the gripper shape vector */
       cpVect boundingVert[] = {
-         cpv(-0.001, -0.001),
-         cpv(-0.001,  0.001),
-         cpv( 0.001,  0.001),
-         cpv( 0.001, -0.001)
+         cpv(-0.01, -0.01),
+         cpv(-0.01,  0.01),
+         cpv( 0.01,  0.01),
+         cpv( 0.01, -0.01)
       };
       /* Create the actual gripper shape */
       cpShape* ptGripperShape = 

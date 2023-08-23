@@ -110,7 +110,7 @@ $ argos3 -q box
     </kheperaiv>
     
     
-    <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
+    <cylinder id="c" height="0.2" radius="0.1" mass="0.01" movable="true">
       <body position="0.1850,0,0" orientation="0,0,0" />
     </cylinder>
     

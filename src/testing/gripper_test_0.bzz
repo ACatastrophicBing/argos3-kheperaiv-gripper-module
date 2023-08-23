@@ -25,11 +25,13 @@ function init() {
 # This function is executed at each time step
 # The main loop is controller by ARGoS
 function step() {
-  set_wheels_debug(-5,5)
+  #set_wheels_debug(-5.0,5.0)
   if(flipper < 50){
+	#set_wheels_debug(-5.0,-5.0)
 	turret_set(3.1415)
-  } else{
-	turret_set(0)
+  } 
+  else{
+	turret_set(0.0)
   }
   flipper = flipper + 1
   if(flipper > 100){
@@ -40,7 +42,7 @@ function step() {
 
 # This function is executed when you press the reset button
 function reset() {
-	turret_set(0)
+	turret_set(0.0)
 	gripper_unlock()
 }
 

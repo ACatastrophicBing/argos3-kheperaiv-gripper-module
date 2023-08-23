@@ -29,6 +29,11 @@ namespace argos {
 
    public:
 
+      enum EGripModes {
+      MODE_OPEN = 0,
+      MODE_CLOSED = 1
+      };
+
       /* Useful gripper aperture values */
       static CRadians UNLOCKED;
       static CRadians LOCKED_POSITIVE;
