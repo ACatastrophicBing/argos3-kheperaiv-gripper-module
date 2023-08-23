@@ -22,14 +22,14 @@ void CRealKheperaIVTurretGripperActuator::Do(Real f_elapsed_time) {
    switch(m_eGrip){
       case MODE_OPEN:
          cgripper_Open_Gripper();
-         printf("Turret off\n");
+         printf("[GRIPPER] Gripper Open\n");
          break;
          case MODE_CLOSED:
-         printf("Passive turret mode\n");
+         printf("[GRIPPER] Gripper Closed\n");
          cgripper_Close_Gripper();
          break;
          default:
-         printf("Invalid turret mode\n");
+         printf("Invalid gripper mode\n");
          break;
    }
 }
@@ -38,14 +38,14 @@ void CRealKheperaIVTurretGripperActuator::Do(Real f_elapsed_time) {
 /****************************************/
 
 void CRealKheperaIVTurretGripperActuator::Lock(){
-   printf("Real robot has gripped\n");
-   m_eGrip = MODE_OPEN;
+   printf("[GRIPPER] Real robot has gripped\n");
+   m_eGrip = MODE_CLOSED;
 }
 
 
 void CRealKheperaIVTurretGripperActuator::Unlock(){
-   printf("Real robot has unlocked gripper");
-   m_eGrip = MODE_CLOSED;
+   printf("[GRIPPER] Real robot has unlocked gripper");
+   m_eGrip = MODE_OPEN;
 }
 
 
