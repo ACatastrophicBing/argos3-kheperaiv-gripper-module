@@ -1,5 +1,5 @@
 #include "real_kheperaiv_turret_force_sensor.h"
-// #include "cgripperI2C.c"
+
 /****************************************/
 /****************************************/
 

@@ -6,7 +6,7 @@
 
 #include "real_kheperaiv_turret_actuator.h"
 #include <argos3/core/utility/logging/argos_log.h>
-// #include "cgripperI2C.c"
+
 
   /****************************************/
   /****************************************/
@@ -16,7 +16,6 @@
 
   CRealKheperaIVTurretActuator::CRealKheperaIVTurretActuator(knet_dev_t* pt_dspic) :
    CRealKheperaIVDevice(pt_dspic) {
-  // CRealKheperaIVTurretActuator::CRealKheperaIVTurretActuator() {
     /* Turret does nada, and if its position was changed while off, we don't want it to instantly turn on */
     cgripper_Turret_Disable();
   }
@@ -77,7 +76,10 @@
      * Change radians into encoders
     */
       LOG << "[TURRET] Setting rotation to /" << c_angle << std::endl;
-      unsigned short sEncoderCount = (unsigned short) (c_angle.GetValue() - CRadians:PI) / CRadians:PI * 44690;
+      if(c_angle.GetValue() < 0){
+        unsigned short sEncoderCount = (unsigned short) ((2 * CRadians::PI.GetValue() + c_angle.GetValue()) / CRadians::PI.GetValue() * 22345) + 22345;
+      }
+        unsigned short sEncoderCount = (unsigned short) (c_angle.GetValue()) / CRadians::PI.GetValue() * 22345;
       LOG << "[TURRET] The current encoder count send message is /" << sEncoderCount << std::endl;
       cgripper_Gripper_Set_Position(sEncoderCount);
    }
