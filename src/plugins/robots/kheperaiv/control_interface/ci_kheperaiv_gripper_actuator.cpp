@@ -72,7 +72,7 @@ namespace argos {
   /****************************************/
 
   void CCI_KheperaIVGripperActuator::Lock() {
-    printf("Gripper Should have locked\n");
+    // printf("Gripper Should have locked\n");
     SetAperture(LOCKED_POSITIVE);
   }
 

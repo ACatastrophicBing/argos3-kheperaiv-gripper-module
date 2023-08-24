@@ -196,7 +196,7 @@ namespace argos {
          /* Controllable entity
             It must be the last one, for actuators/sensors to link to composing entities correctly */
          m_pcControllableEntity = new CControllableEntity(this, "controller_0");
-         printf("Attempting to add controllable entity\n");
+         printf("Attempting to add controllable entity, normally will tell us there is a symbol not being recognized\n");
          AddComponent(*m_pcControllableEntity);
          printf("Attempting to set the controller name\n");
          m_pcControllableEntity->SetController(str_controller_id);

@@ -51,7 +51,7 @@ void CKheperaIVGripping::Init(TConfigurationNode& t_node) {
    m_pcUltrasound       = GetSensor  <CCI_KheperaIVUltrasoundSensor   >("kheperaiv_ultrasound" );
    m_pcGripper          = GetActuator<CCI_KheperaIVGripperActuator    >("kheperaiv_gripper");
    m_pcTurret           = GetActuator<CCI_KheperaIVTurretActuator     >("kheperaiv_turret");
-   m_pcTurretEncoder    = GetSensor  <CCI_KheperaIVTurretEncoderSensor>("kheperaiv_turret");
+   m_pcTurretEncoder    = GetSensor  <CCI_KheperaIVTurretEncoderSensor>("kheperaiv_turret_encoder");
 
    /*
     * Parse the configuration file
@@ -65,6 +65,7 @@ void CKheperaIVGripping::Init(TConfigurationNode& t_node) {
    GetNodeAttributeOrDefault(t_node, "delta", m_fDelta, m_fDelta);
    GetNodeAttributeOrDefault(t_node, "velocity", m_fWheelVelocity, m_fWheelVelocity);
 
+   m_pcTurret->InitI2C();
    m_pcTurret->SetMode(m_pcTurret->MODE_POSITION_CONTROL);
 
    counter = 0;
@@ -85,18 +86,23 @@ void CKheperaIVGripping::ControlStep() {
    if(counter < 50){
       m_pcTurret->SetRotation(CRadians::PI);
       m_pcGripper->Lock();
+      m_pcWheels->SetLinearVelocity(-5.0,5.0);
       RLOG << "Test: "
    << "turning" 
    << std::endl;
    } else{
       m_pcTurret->SetRotation(CRadians::ZERO);
       m_pcGripper->Unlock();
+      m_pcWheels->SetLinearVelocity(5.0,-5.0);
       RLOG << "Test: "
    << "not turning=" << counter
    << std::endl;
    }
+   
    counter = counter +1; // Literally bare bones keep it as simple as possible
-   m_pcWheels->SetLinearVelocity(10,10);
+   if(counter > 100){
+      counter = 0;
+   }
 
    RLOG << "Running" << std::endl;
 }

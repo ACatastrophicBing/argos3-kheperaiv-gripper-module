@@ -49,7 +49,7 @@
         <positioning         implementation="default" />
       </sensors>
       
-      <params>
+      <params  bytecode_file="gripper_test_0.bo" debug_file="gripper_test_0.bdb">
         <wheel_turning hard_turn_angle_threshold="90"
                        soft_turn_angle_threshold="70"
                        no_turn_angle_threshold="10"
