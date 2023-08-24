@@ -65,7 +65,6 @@ void CKheperaIVGripping::Init(TConfigurationNode& t_node) {
    GetNodeAttributeOrDefault(t_node, "delta", m_fDelta, m_fDelta);
    GetNodeAttributeOrDefault(t_node, "velocity", m_fWheelVelocity, m_fWheelVelocity);
 
-   m_pcTurret->InitI2C();
    m_pcTurret->SetMode(m_pcTurret->MODE_POSITION_CONTROL);
 
    counter = 0;
