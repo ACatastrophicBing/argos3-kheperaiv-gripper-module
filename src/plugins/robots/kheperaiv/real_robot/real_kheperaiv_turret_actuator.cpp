@@ -68,24 +68,24 @@
       switch(m_eMode){
       case MODE_OFF:
         cgripper_Turret_Disable();
-        printf("[TURRET] Turret off\n");
+        LOG << "[TURRET] Turret off\n" << std::endl;
         break;
       case MODE_PASSIVE:
-        printf("[TURRET] Passive turret mode\n");
+        LOG << "[TURRET] Passive turret mode\n" << std::endl;
         cgripper_Turret_Disable();
         break;
       case MODE_SPEED_CONTROL:
-        printf("[TURRET] Speed turret mode\n");
+        LOG << "[TURRET] Speed turret mode\n" << std::endl;
         cgripper_Turret_Speed_Mode();
         cgripper_Turret_Set_Speed(m_unSpeed);
         break;
       case MODE_POSITION_CONTROL:
-        printf("[TURRET] Position turret mode\n");
+        LOG << "[TURRET] Position turret mode\n" << std::endl;
         cgripper_Gripper_Set_Position(m_unEncoderCount); 
         cgripper_Turret_Position_Mode();
         break;
       default:
-        printf("[TURRET] Invalid turret mode\n");
+        LOG << "[TURRET] Invalid turret mode\n" << std::endl;
         break;
     }
   }

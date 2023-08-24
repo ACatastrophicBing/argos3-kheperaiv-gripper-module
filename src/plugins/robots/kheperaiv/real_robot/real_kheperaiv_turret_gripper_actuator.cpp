@@ -1,4 +1,5 @@
 #include "real_kheperaiv_turret_gripper_actuator.h"
+#include <argos3/core/utility/logging/argos_log.h>
 
 
 /****************************************/
@@ -22,14 +23,14 @@ void CRealKheperaIVTurretGripperActuator::Do(Real f_elapsed_time) {
    switch(m_eGrip){
       case MODE_OPEN:
          cgripper_Open_Gripper();
-         printf("[GRIPPER] Gripper Open\n");
+         LOG << "[GRIPPER] Gripper Open\n" << std::endl;
          break;
          case MODE_CLOSED:
-         printf("[GRIPPER] Gripper Closed\n");
+         LOG << "[GRIPPER] Gripper Closed\n" << std::endl;
          cgripper_Close_Gripper();
          break;
          default:
-         printf("Invalid gripper mode\n");
+         LOG << "Invalid gripper mode\n" << std::endl;
          break;
    }
 }
@@ -38,13 +39,13 @@ void CRealKheperaIVTurretGripperActuator::Do(Real f_elapsed_time) {
 /****************************************/
 
 void CRealKheperaIVTurretGripperActuator::Lock(){
-   printf("[GRIPPER] Real robot has gripped\n");
+   LOG << "[GRIPPER] Real robot has gripped\n" << std::endl;
    m_eGrip = MODE_CLOSED;
 }
 
 
 void CRealKheperaIVTurretGripperActuator::Unlock(){
-   printf("[GRIPPER] Real robot has unlocked gripper");
+   LOG << "[GRIPPER] Real robot has unlocked gripper" << std::endl;
    m_eGrip = MODE_OPEN;
 }
 

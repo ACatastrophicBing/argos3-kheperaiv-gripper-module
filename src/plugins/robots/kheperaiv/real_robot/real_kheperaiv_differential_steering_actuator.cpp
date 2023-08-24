@@ -74,8 +74,6 @@ void CRealKheperaIVDifferentialSteeringActuator::Do(Real f_elapsed_time) {
 void CRealKheperaIVDifferentialSteeringActuator::SetLinearVelocity(Real f_left_velocity,
                                                                    Real f_right_velocity) {
   /* The speed is passed in cm/s, but the Khepera expects it in mm/s  */
-
-    printf("Trying to change the wheel speeds in the controller");
   m_fCurrentVelocity[0] = f_left_velocity;
   m_fCurrentVelocity[1] = f_right_velocity;
   m_pcDevice->SetVelocity(m_fCurrentVelocity);
