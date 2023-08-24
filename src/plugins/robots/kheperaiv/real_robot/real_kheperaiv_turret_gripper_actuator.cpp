@@ -7,6 +7,7 @@
 
 CRealKheperaIVTurretGripperActuator::CRealKheperaIVTurretGripperActuator(knet_dev_t* pt_dspic) :
    CRealKheperaIVDevice(pt_dspic) {
+      cgripper_init();
    /* The gripper once on is automatically initialized */
 }
    

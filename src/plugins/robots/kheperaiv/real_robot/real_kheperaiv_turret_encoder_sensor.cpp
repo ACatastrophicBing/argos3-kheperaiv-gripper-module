@@ -5,6 +5,7 @@
 
 CRealKheperaIVTurretEncoderSensor::CRealKheperaIVTurretEncoderSensor(knet_dev_t* pt_dspic) :
    CRealKheperaIVDevice(pt_dspic) {
+      cgripper_init();
    m_unTurretEncoder = cgripper_Turret_Get_Position();
    m_fTurretEncoderDegrees = (Real) m_unTurretEncoder / 44690.0 * 360.0;
    m_cRotation = CRadians(m_fTurretEncoderDegrees);  
