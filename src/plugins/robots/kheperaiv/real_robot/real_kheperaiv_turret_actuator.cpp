@@ -56,9 +56,10 @@
     */
       LOG << "[TURRET] Setting rotation to /" << c_angle << std::endl;
       if(c_angle.GetValue() < 0){
-        m_unEncoderCount = (unsigned short) ((2 * CRadians::PI.GetValue() + c_angle.GetValue()) / CRadians::PI.GetValue() * 22345) + 22345;
+        m_unEncoderCount = (unsigned short) ((2 * CRadians::PI.GetValue() + c_angle.GetValue()) / CRadians::PI.GetValue() * 22345.0) + 22345;
+      } else{
+        m_unEncoderCount = (unsigned short) (c_angle.GetValue()) / CRadians::PI.GetValue() * 22345.0;
       }
-        m_unEncoderCount = (unsigned short) (c_angle.GetValue()) / CRadians::PI.GetValue() * 22345;
       LOG << "[TURRET] The current encoder count send message is /" << m_unEncoderCount << std::endl;
    }
 

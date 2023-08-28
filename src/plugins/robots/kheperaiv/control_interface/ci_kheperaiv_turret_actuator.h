@@ -108,6 +108,12 @@ namespace argos {
       virtual void SetMode(ETurretModes e_mode) = 0;
 
       /**
+       * TODO
+       * @brief Gets the desired rotation we are sending to the robot
+      */
+      // void GetDesiredRotation() = 0;
+
+      /**
        * @brief Sets the turret control mode to active, and sets the target rotation to the given one
        *
        * @param c_angle desired turret rotation

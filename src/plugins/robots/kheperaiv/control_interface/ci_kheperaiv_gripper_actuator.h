@@ -77,6 +77,14 @@ namespace argos {
        */
       virtual void Unlock();
 
+      /**
+       * @brief Returns if the gripper is locked or unlocked based off
+       * messages sent to it, not based on the simulation considering it locked
+       * @return true is locked
+       * @return false is not locked
+       */
+      virtual bool GetIsLocked();
+
 #ifdef ARGOS_WITH_LUA
       virtual void CreateLuaState(lua_State* pt_lua_state);
 #endif

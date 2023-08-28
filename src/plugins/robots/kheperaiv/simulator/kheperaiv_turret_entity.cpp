@@ -101,7 +101,7 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   void CKheperaIVTurretEntity::SetDesiredRotation(const CRadians& c_rotation) {
+   void CKheperaIVTurretEntity::SetRotation(const CRadians& c_rotation) {
       m_cDesRot = c_rotation;
       m_cDesRot.SignedNormalize();
    }
@@ -109,7 +109,7 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   void CKheperaIVTurretEntity::SetDesiredRotationSpeed(Real f_speed) {
+   void CKheperaIVTurretEntity::SetRotationSpeed(Real f_speed) {
       m_fDesRotSpeed = f_speed;
    }
 

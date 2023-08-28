@@ -28,6 +28,7 @@ namespace argos {
 
    void CKheperaIVGripperDefaultActuator::Update() {
       // printf("Gripper Is Updating");
+      // LOG << "Gripper has a locked state of " << m_cAperture << std::endl;
       m_pcGripperEquippedEntity->SetLockState(Abs(m_cAperture) / CRadians::PI_OVER_TWO);
    }
 

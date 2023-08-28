@@ -15,8 +15,8 @@ namespace argos {
   /****************************************/
   /****************************************/
    
-  CRadians CCI_KheperaIVGripperActuator::LOCKED_NEGATIVE(-ARGOS_PI * 0.5f);
-  CRadians CCI_KheperaIVGripperActuator::LOCKED_POSITIVE(ARGOS_PI * 0.5f);
+  CRadians CCI_KheperaIVGripperActuator::LOCKED_NEGATIVE(-ARGOS_PI * 0.6f);
+  CRadians CCI_KheperaIVGripperActuator::LOCKED_POSITIVE(ARGOS_PI * 0.6f);
   CRadians CCI_KheperaIVGripperActuator::UNLOCKED(0.0f);
 
   CRange<CRadians> APERTURE_RANGE(CCI_KheperaIVGripperActuator::LOCKED_NEGATIVE,
@@ -66,6 +66,7 @@ namespace argos {
     m_cAperture = c_aperture;
     m_cAperture.SignedNormalize();
     APERTURE_RANGE.TruncValue(m_cAperture);
+    // LOG << "Setting the gripper aperture to " << c_aperture << std::endl;
   }
 
   /****************************************/
@@ -82,6 +83,13 @@ namespace argos {
   void CCI_KheperaIVGripperActuator::Unlock() {
     SetAperture(UNLOCKED);
   }
+
+  /****************************************/
+  /****************************************/
+
+  bool CCI_KheperaIVGripperActuator::GetIsLocked() {
+    return (m_cAperture.GetValue() > 1.0);
+  }  
 
   /****************************************/
   /****************************************/

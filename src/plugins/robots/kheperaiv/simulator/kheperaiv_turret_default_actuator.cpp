@@ -29,14 +29,14 @@ namespace argos {
    /****************************************/
 
    void CKheperaIVTurretDefaultActuator::SetRotation(const CRadians& c_angle) {
-      m_pcTurretEntity->SetDesiredRotation(c_angle);
+      m_pcTurretEntity->SetRotation(c_angle);
    }
 
    /****************************************/
    /****************************************/
 
    void CKheperaIVTurretDefaultActuator::SetRotationSpeed(SInt32 n_speed_pulses) {
-      m_pcTurretEntity->SetDesiredRotationSpeed(RPM_TO_RADIANS_PER_SEC * n_speed_pulses);
+      m_pcTurretEntity->SetRotationSpeed(RPM_TO_RADIANS_PER_SEC * n_speed_pulses);
    }
 
    /****************************************/

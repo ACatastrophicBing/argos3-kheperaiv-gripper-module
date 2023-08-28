@@ -60,9 +60,9 @@ namespace argos {
 
       Real GetDesiredRotationSpeed() const;
 
-      void SetDesiredRotation(const CRadians& c_rotation);
+      void SetRotation(const CRadians& c_rotation);
 
-      void SetDesiredRotationSpeed(Real f_speed);
+      void SetRotationSpeed(Real f_speed);
 
       virtual std::string GetTypeDescription() const {
          return "turret";
