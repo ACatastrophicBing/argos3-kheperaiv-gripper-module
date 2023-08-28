@@ -32,7 +32,7 @@
         <positioning         implementation="default" />
         <kheperaiv_turret_encoder      implementation="default" />
       </sensors>
-      <params/>
+      <params bytecode_file="gripper_test_0.bo" debug_file="gripper_test_0.bdb"/>
     </buzz_controller_kheperaiv>
 
   </controllers>

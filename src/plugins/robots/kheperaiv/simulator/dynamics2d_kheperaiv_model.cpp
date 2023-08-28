@@ -205,6 +205,8 @@ namespace argos {
             cpConstraintFree(m_ptBaseGripperAngularMotion);
             break;
          case MODE_POSITION_CONTROL:
+            /* TODO : Change turret position / orientation in simulation !!! */
+            break;
          case MODE_SPEED_CONTROL:
             cpSpaceRemoveConstraint(GetDynamics2DEngine().GetPhysicsSpace(), m_ptBaseGripperLinearMotion);
             cpSpaceRemoveConstraint(GetDynamics2DEngine().GetPhysicsSpace(), m_ptGripperControlAngularMotion);

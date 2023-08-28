@@ -14,6 +14,7 @@ namespace argos {
 
 #include <argos3/core/simulator/entity/entity.h>
 #include <argos3/core/utility/math/vector3.h>
+#include <argos3/core/utility/logging/argos_log.h>
 
 namespace argos {
 
@@ -24,10 +25,10 @@ namespace argos {
       ENABLE_VTABLE();
 
       enum EMode {
-         MODE_OFF,
-         MODE_PASSIVE,
-         MODE_SPEED_CONTROL,
-         MODE_POSITION_CONTROL
+         MODE_OFF = 0,
+         MODE_PASSIVE = 1,
+         MODE_SPEED_CONTROL = 2,
+         MODE_POSITION_CONTROL = 3
       };
 
    public:
@@ -57,6 +58,10 @@ namespace argos {
       Real GetRotationSpeed() const;
 
       const CRadians& GetDesiredRotation() const;
+
+      const CRadians* GetDesiredRotationSend() const{
+         return &m_cDesRot;
+      }
 
       Real GetDesiredRotationSpeed() const;
 

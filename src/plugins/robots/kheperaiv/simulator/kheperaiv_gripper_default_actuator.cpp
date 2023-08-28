@@ -1,7 +1,7 @@
 /**
  * @file <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_gripper_default_actuator.cpp>
  *
- * @author Chandler Garcia & Yasmine Aoua */
+ * @author Chandler Garcia */
 
 #include "kheperaiv_gripper_default_actuator.h"
 #include <argos3/core/utility/logging/argos_log.h>
@@ -28,7 +28,8 @@ namespace argos {
 
    void CKheperaIVGripperDefaultActuator::Update() {
       // printf("Gripper Is Updating");
-      // LOG << "Gripper has a locked state of " << m_cAperture << std::endl;
+      // LOG << "[SIMULATION] Khepera Gripper has a locked state of " << m_cAperture << std::endl;
+      // LOG << "[SIMULATION] CGripperEntity has a locked state of " << m_pcGripperEquippedEntity->GetLockState() << std::endl;
       m_pcGripperEquippedEntity->SetLockState(Abs(m_cAperture) / CRadians::PI_OVER_TWO);
    }
 

@@ -102,6 +102,7 @@ namespace argos {
    /****************************************/
 
    void CKheperaIVTurretEntity::SetRotation(const CRadians& c_rotation) {
+      // LOG<<"Want to go "<<m_cDesRot<<std::endl;
       m_cDesRot = c_rotation;
       m_cDesRot.SignedNormalize();
    }
