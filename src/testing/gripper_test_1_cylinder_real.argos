@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="0" />
+    <experiment length="600"
+                ticks_per_second="10"
+                random_seed="124" />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+    <buzz_controller_kheperaiv id="khivbzgrp">
+      <actuators>
+        <differential_steering implementation="default" />
+        <kheperaiv_gripper     implementation="default"/>
+        <kheperaiv_turret      implementation="default" />
+        <range_and_bearing     implementation="default" />
+      </actuators>
+      <sensors>
+        <differential_steering implementation="default" />
+        <kheperaiv_proximity  implementation="default" show_rays="true" />
+        <kheperaiv_ultrasound implementation="default" show_rays="false" />
+        <range_and_bearing   implementation="medium" medium="rab"
+                             show_rays="true" noise_std_dev="0" />
+        <positioning         implementation="default" />
+        <kheperaiv_turret_encoder      implementation="default" />
+      </sensors>
+      <params bytecode_file="gripper_test_0.bo" debug_file="gripper_test_0.bdb"/>
+    </buzz_controller_kheperaiv>
+
+  </controllers>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="5, 5, 1" center="0,0,0.5">
+
+    <box id="wall_north" size="4,0.1,0.5" movable="false">
+      <body position="0,2,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_south" size="4,0.1,0.5" movable="false">
+      <body position="0,-2,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_east" size="0.1,4,0.5" movable="false">
+      <body position="2,0,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_west" size="0.1,4,0.5" movable="false">
+      <body position="-2,0,0" orientation="0,0,0" />
+    </box>
+
+    <cylinder id="Cylinder_1" height="0.2" radius="0.12" mass="0.01" movable="true">
+      <body position="0,0,0" orientation="0,0,0" />
+    </cylinder>
+
+    <!-- <kheperaiv id="kiv_0">
+      <body position="0,0,0" orientation="0,0,0" />
+      <controller config="khivbzgrp" />
+    </kheperaiv> -->
+
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <tracking>
+      <updaters>
+        <vicon_updater/>
+      </updaters>
+      <assigners>
+        <Khepera default="khivbzgrp"/>
+      </assigners>
+    </tracking>
+  </physics_engines>
+  
+  <loop_functions label="MasterLoopFunctions">
+    <sub_loop_function label="BaseNetworking" />
+  </loop_functions>
+
+   <!-- <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines> -->
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" />
+    <!-- <led id="leds" /> -->
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+    <qt-opengl>
+      <!-- <user_functions label="buzz_qt" /> -->
+      <camera>
+        <placements>
+          <placement index="0" position="0.0,-3.82888,9.65782" look_at="0.0,-3.45302,8.73114" up="0.0,0.926654,0.375866" lens_focal_length="65" />
+            <placement index="1" position="3.82726,-3.79865,9.79404" look_at="3.48266,-3.44168,8.92581" up="-0.603008,0.624665,0.496161" lens_focal_length="65" />
+            <placement index="2" position="0.0,0.0,10.0" look_at="0.0,0.0,9.5" up="0.0,0.943554,0.331159" lens_focal_length="65" />
+        </placements>
+      </camera>
+    </qt-opengl>
+  </visualization>
+
+
+</argos-configuration>
