@@ -266,6 +266,16 @@ namespace argos {
    /****************************************/
    /****************************************/
 
+   void CDynamics2DKheperaIVModel::UpdateEntityStatus(){
+      m_cGripperEntity.SetExtension(m_pcGripper->GetExtension());
+      cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
+      m_cGripperEntity.SetAnchor1(CVector3(ptSpring->anchr1.x,ptSpring->anchr1.y,0.0));
+      m_cGripperEntity.SetAnchor2(CVector3(ptSpring->anchr2.x,ptSpring->anchr2.y,0.0));
+   }
+
+   /****************************************/
+   /****************************************/
+
    void CDynamics2DKheperaIVModel::UpdateFromEntityStatus() {
       /* Do we want to move? */
       if((m_fCurrentWheelVelocity[KHEPERAIV_LEFT_WHEEL] != 0.0f) ||

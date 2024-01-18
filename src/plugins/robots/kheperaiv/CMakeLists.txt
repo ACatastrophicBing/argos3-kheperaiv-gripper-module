@@ -12,6 +12,7 @@ set(ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_CONTROLINTERFACE
   control_interface/ci_kheperaiv_proximity_sensor.h
   control_interface/ci_kheperaiv_ultrasound_sensor.h
   control_interface/ci_kheperaiv_gripper_actuator.h
+  control_interface/ci_kheperaiv_gripper_force_sensor.h
   control_interface/ci_kheperaiv_turret_actuator.h
   control_interface/ci_kheperaiv_turret_encoder_sensor.h)
 if(BUZZ_FOUND)
@@ -33,7 +34,9 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/kheperaiv_turret_entity.h
     simulator/kheperaiv_turret_encoder_default_sensor.h
     simulator/kheperaiv_turret_default_actuator.h
-    simulator/kheperaiv_gripper_default_actuator.h)
+    simulator/kheperaiv_gripper_default_actuator.h
+    simulator/kheperaiv_gripper_force_sensor.h
+    )
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 # argos3/plugins/robots/kheperaiv/real_robot
 if(ARGOS_BUILD_FOR STREQUAL "khiv")
@@ -73,6 +76,7 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV
   control_interface/ci_kheperaiv_proximity_sensor.cpp
   control_interface/ci_kheperaiv_ultrasound_sensor.cpp
   control_interface/ci_kheperaiv_gripper_actuator.cpp
+  control_interface/ci_kheperaiv_gripper_force_sensor.cpp
   control_interface/ci_kheperaiv_turret_actuator.cpp
   control_interface/ci_kheperaiv_turret_encoder_sensor.cpp)
 if(BUZZ_FOUND)
@@ -96,7 +100,8 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/kheperaiv_turret_entity.cpp
     simulator/kheperaiv_turret_encoder_default_sensor.cpp
     simulator/kheperaiv_turret_default_actuator.cpp
-    simulator/kheperaiv_gripper_default_actuator.cpp)
+    simulator/kheperaiv_gripper_default_actuator.cpp
+    simulator/kheperaiv_gripper_force_sensor.cpp)
   # Compile the graphical visualization only if the necessary libraries have been found
   if(ARGOS_QTOPENGL_FOUND)
     include_directories(${ARGOS_QTOPENGL_INCLUDE_DIRS})

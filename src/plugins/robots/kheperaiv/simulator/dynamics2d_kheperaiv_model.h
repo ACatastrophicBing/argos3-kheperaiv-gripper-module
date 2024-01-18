@@ -65,7 +65,7 @@ namespace argos {
 
       CKheperaIVEntity&         m_CKheperaIVEntity;
       CWheeledEntity&         m_cWheeledEntity;
-      CGripperEquippedEntity& m_cGripperEntity;
+      CKheperaIVGripperEntity& m_cGripperEntity;
 
       CDynamics2DDifferentialSteeringControl m_cDiffSteering;
       CDynamics2DGripper*                    m_pcGripper;
