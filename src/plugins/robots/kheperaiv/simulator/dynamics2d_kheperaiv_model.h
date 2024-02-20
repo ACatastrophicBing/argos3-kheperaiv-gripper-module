@@ -16,6 +16,7 @@ namespace argos {
 #include <argos3/plugins/simulator/physics_engines/dynamics2d/dynamics2d_multi_body_object_model.h>
 #include <argos3/plugins/simulator/physics_engines/dynamics2d/dynamics2d_differentialsteering_control.h>
 #include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_entity.h>
+#include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_gripper_entity.h>
 
 namespace argos {
 
@@ -35,6 +36,8 @@ namespace argos {
       virtual void CalculateBoundingBox();
 
       virtual void UpdateFromEntityStatus();
+
+      virtual void UpdateEntityStatus();
 
       void UpdateOriginAnchor(SAnchor& s_anchor);
 

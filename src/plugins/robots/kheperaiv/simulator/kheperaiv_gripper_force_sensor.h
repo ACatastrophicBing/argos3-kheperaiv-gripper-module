@@ -16,13 +16,14 @@ namespace argos {
 
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_gripper_force_sensor.h>
 #include <argos3/core/simulator/sensor.h>
-#include <argos3/plugins/simulator/entities/gripper_equipped_entity.h>
+#include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_gripper_entity.h>
+// #include "kheperaiv_gripper_entity.h"
 
 
 namespace argos {
 
-   class CKheperaIVGripperForceSensor : public CSimulatedSensor,
-                                          public CCI_KheperaIVGripperForceSensor {
+   class CKheperaIVGripperForceSensor : public CCI_KheperaIVGripperForceSensor,
+                                          public CSimulatedSensor {
 
    public:
 
@@ -35,11 +36,11 @@ namespace argos {
       virtual void Init(TConfigurationNode& t_tree);
 
       virtual void Update();
+      
       virtual void Reset();
 
    private:
-      CGripperEquippedEntity* m_pcGripperEquippedEntity;
-      Real m_fExtension;
+      CKheperaIVGripperEntity* m_pcGripperEquippedEntity;
       
    };
 

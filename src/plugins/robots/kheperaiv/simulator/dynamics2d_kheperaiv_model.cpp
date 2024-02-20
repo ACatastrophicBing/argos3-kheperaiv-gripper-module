@@ -158,9 +158,6 @@ namespace argos {
 
       ptGripperShape->e = 0.0;
       ptGripperShape->u = 0.7;
-      /* Create our grippable ring (Doesn't work) */
-      // m_pcGrippable = new CDynamics2DGrippable(GetEmbodiedEntity(),
-      //                                          ptGripperShape);
       /* Create our gripper */
       m_pcGripper = new CDynamics2DGripper(GetDynamics2DEngine(),
                                            m_cGripperEntity,
@@ -271,6 +268,14 @@ namespace argos {
       cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
       m_cGripperEntity.SetAnchor1(CVector3(ptSpring->anchr1.x,ptSpring->anchr1.y,0.0));
       m_cGripperEntity.SetAnchor2(CVector3(ptSpring->anchr2.x,ptSpring->anchr2.y,0.0));
+      m_cGripperEntity.SetOriginAnchorRob(GetEmbodiedEntity().GetOriginAnchor().Position);
+      
+      CVector3 gripper_anchr = m_cGripperEntity.GetAnchor1();
+      CVector3 grippee_anchr = m_cGripperEntity.GetAnchor2();
+      CVector3 robot_anchor = m_cGripperEntity.GetOriginAnchorRob();
+      CVector3 vector_attachment = gripper_anchr - grippee_anchr;
+      CVector3 vector_grip_direction = gripper_anchr - robot_anchor;
+      CRadians vector_direction = vector_grip_direction.GetAngleWith(vector_attachment);
    }
 
    /****************************************/

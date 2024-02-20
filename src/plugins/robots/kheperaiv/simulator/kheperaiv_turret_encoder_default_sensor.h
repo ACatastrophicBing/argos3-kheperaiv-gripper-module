@@ -1,7 +1,7 @@
 /**
- * @file <argos3/plugins/robots/foot-bot/simulator/kheperaiv_turret_encoder_default_sensor.h>
+ * @file <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_turret_encoder_default_sensor.h>
  *
- * @author Chandler Garcia & Yasmine Aoua
+ * @author Chandler Garcia
  */
 
 #ifndef KHEPERAIV_TURRET_ENCODER_DEFAULT_SENSOR_H
@@ -15,7 +15,6 @@ namespace argos {
 }
 
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_turret_encoder_sensor.h>
-#include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_turret_encoder_default_sensor.h>
 #include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_turret_entity.h>
 #include <argos3/core/simulator/sensor.h>
 

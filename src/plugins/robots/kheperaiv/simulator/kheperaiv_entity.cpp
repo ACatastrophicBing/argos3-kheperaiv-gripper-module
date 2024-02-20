@@ -12,13 +12,14 @@
 #include <argos3/core/simulator/entity/controllable_entity.h>
 #include <argos3/core/simulator/entity/embodied_entity.h>
 #include <argos3/plugins/simulator/entities/battery_equipped_entity.h>
-#include <argos3/plugins/simulator/entities/gripper_equipped_entity.h> // make sure this is right includes
+// #include <argos3/plugins/simulator/entities/gripper_equipped_entity.h> // make sure this is right includes
 #include <argos3/plugins/simulator/entities/ground_sensor_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/led_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/light_sensor_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/proximity_sensor_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/rab_equipped_entity.h>
 #include "kheperaiv_turret_entity.h" // This should be correct
+#include "kheperaiv_gripper_entity.h"
 
 static CRadians ULTRASOUND_SENSOR_ANGLES[5] = {
    CRadians::ZERO,
@@ -38,7 +39,7 @@ namespace argos {
       m_pcBatteryEquippedEntity(NULL), // We moved this order since it wasn't alphabetical...
       m_pcControllableEntity(NULL),
       m_pcEmbodiedEntity(NULL),
-      m_pcGripperEquippedEntity(NULL), // Added gripper here
+      m_pcKheperaIVGripperEquippedEntity(NULL), // Added gripper here
       m_pcGroundSensorEquippedEntity(NULL),
       m_pcKheperaIVTurretEntity(NULL), // Added turret here
       m_pcLEDEquippedEntity(NULL),
@@ -63,7 +64,7 @@ namespace argos {
       m_pcBatteryEquippedEntity(NULL), // We moved this order since it wasn't alphabetical...
       m_pcControllableEntity(NULL),
       m_pcEmbodiedEntity(NULL),
-      m_pcGripperEquippedEntity(NULL), // Added gripper here
+      m_pcKheperaIVGripperEquippedEntity(NULL), // Added gripper here
       m_pcGroundSensorEquippedEntity(NULL),
       m_pcKheperaIVTurretEntity(NULL), // Added turret here
       m_pcLEDEquippedEntity(NULL),
@@ -93,14 +94,18 @@ namespace argos {
          // printf("m_pcKheperaIVTurretEntity has been added as a component\n");
          AddComponent(*m_pcKheperaIVTurretEntity);
          /* Gripper equipped entity */
-         m_pcGripperEquippedEntity =
-            new CGripperEquippedEntity(this,
+         // m_pcGripperEquippedEntity =
+         //    new CGripperEquippedEntity(this,
+         //                               "gripper_0",
+         //                               CVector3(KHEPERAIV_GRIPPER_RING_RADIUS, 0.0f, KHEPERAIV_GRIPPER_ELEVATION),
+         //                               CVector3::X);
+         m_pcKheperaIVGripperEquippedEntity =
+            new CKheperaIVGripperEntity(this,
                                        "gripper_0",
                                        CVector3(KHEPERAIV_GRIPPER_RING_RADIUS, 0.0f, KHEPERAIV_GRIPPER_ELEVATION),
                                        CVector3::X);
-         AddComponent(*m_pcGripperEquippedEntity);
-         /* The above code was taken directly from footbot */
-         // printf("m_pcGripperEquippedEntity has been added as a component\n");
+         AddComponent(*m_pcKheperaIVGripperEquippedEntity);
+         // printf("m_pcKheperaIVGripperEquippedEntity has been added as a component\n");
 
          /* LED equipped entity */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
@@ -242,13 +247,13 @@ namespace argos {
          // m_pcTurretEntity = new CKheperaivTurretEntity(this, "turret_0", cTurretAnchor);
          // AddComponent(*m_pcTurretEntity); // This is the footbot code we used as a base
          /* Gripper equipped entity */
-         m_pcGripperEquippedEntity =
-            new CGripperEquippedEntity(this,
+         m_pcKheperaIVGripperEquippedEntity =
+            new CKheperaIVGripperEntity(this,
                                        "gripper_0",
                                        CVector3(KHEPERAIV_GRIPPER_RING_RADIUS, 0.0f, KHEPERAIV_GRIPPER_ELEVATION),
                                        CVector3::X);
          printf("m_pcGripperEquippedEntity SHOULD have been added as a component\n");
-         AddComponent(*m_pcGripperEquippedEntity);
+         AddComponent(*m_pcKheperaIVGripperEquippedEntity);
          /* The above code was taken directly from footbot */
 
          
@@ -384,9 +389,9 @@ namespace argos {
          m_pcRABEquippedEntity->Update();
       if(m_pcBatteryEquippedEntity->IsEnabled())
          m_pcBatteryEquippedEntity->Update();
-      if(m_pcGripperEquippedEntity->IsEnabled()){
-         // printf("m_pcGripperEquippedEntity is enabled\n");
-         m_pcGripperEquippedEntity->Update();
+      if(m_pcKheperaIVGripperEquippedEntity->IsEnabled()){
+         // printf("m_pcKheperaIVGripperEquippedEntity is enabled\n");
+         m_pcKheperaIVGripperEquippedEntity->Update();
       }
       if(m_pcKheperaIVTurretEntity->IsEnabled()){
          // printf("m_pcTurretEntity is enabled\n");

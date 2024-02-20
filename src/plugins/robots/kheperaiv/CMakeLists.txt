@@ -36,6 +36,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/kheperaiv_turret_default_actuator.h
     simulator/kheperaiv_gripper_default_actuator.h
     simulator/kheperaiv_gripper_force_sensor.h
+    simulator/kheperaiv_gripper_entity.h
     )
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 # argos3/plugins/robots/kheperaiv/real_robot
@@ -101,7 +102,9 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/kheperaiv_turret_encoder_default_sensor.cpp
     simulator/kheperaiv_turret_default_actuator.cpp
     simulator/kheperaiv_gripper_default_actuator.cpp
-    simulator/kheperaiv_gripper_force_sensor.cpp)
+    simulator/kheperaiv_gripper_force_sensor.cpp
+    simulator/kheperaiv_gripper_entity.cpp
+    )
   # Compile the graphical visualization only if the necessary libraries have been found
   if(ARGOS_QTOPENGL_FOUND)
     include_directories(${ARGOS_QTOPENGL_INCLUDE_DIRS})
