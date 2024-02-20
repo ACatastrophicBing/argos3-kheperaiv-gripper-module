@@ -17,6 +17,13 @@ namespace argos {
 
    CKheperaIVGripperForceSensor::CKheperaIVGripperForceSensor() :
      m_pcGripperEquippedEntity(nullptr) {}
+     
+   /****************************************/
+   /****************************************/
+
+   CKheperaIVGripperForceSensor::~CKheperaIVGripperForceSensor() {
+      delete m_pcGripperEquippedEntity;
+   }
 
    /****************************************/
    /****************************************/
@@ -84,34 +91,34 @@ namespace argos {
    /****************************************/
 
    void CKheperaIVGripperForceSensor::Reset() {
-      
+      m_cForceVector = CVector2(0.0, 0.0);
    }
 
    /****************************************/
    /****************************************/
 
-   // REGISTER_SENSOR(CKheperaIVGripperForceSensor,
-   //                 "kheperaiv_grippper_force", "default",
-   //                 "Chandler Garcia [crgarcia@wpi.edu]",
-   //                 "1.0",
-   //                 "The KheperaIV GAARA Force sensor.",
-   //                 "This sensor accesses the GAARA module force sensor. For a complete description\n"
-   //                 "of its usage, refer to the ci_kheperaiv_gripper_force_sensor.h interface.  "
-   //                 "REQUIRED XML CONFIGURATION\n\n"
-   //                   "  <controllers>\n"
-   //                   "    ...\n"
-   //                   "    <my_controller ...>\n"
-   //                   "      ...\n"
-   //                   "      <actuators>\n"
-   //                   "        ...\n"
-   //                   "        <kheperaiv_grippper_force implementation=\"default\" />\n"
-   //                   "        ...\n"
-   //                   "      </actuators>\n"
-   //                   "      ...\n"
-   //                   "    </my_controller>\n"
-   //                   "    ...\n"
-   //                   "  </controllers>\n\n",
-   //                 "Usable"
-	// 	  );
+   REGISTER_SENSOR(CKheperaIVGripperForceSensor,
+                   "kheperaiv_gripper_force", "default",
+                   "Chandler Garcia [crgarcia@wpi.edu]",
+                   "1.0",
+                   "The KheperaIV GAARA Force sensor.",
+                   "This sensor accesses the GAARA module force sensor. For a complete description\n"
+                   "of its usage, refer to the ci_kheperaiv_gripper_force_sensor.h interface.  "
+                   "REQUIRED XML CONFIGURATION\n\n"
+                     "  <controllers>\n"
+                     "    ...\n"
+                     "    <my_controller ...>\n"
+                     "      ...\n"
+                     "      <actuators>\n"
+                     "        ...\n"
+                     "        <kheperaiv_grippper_force implementation=\"default\" />\n"
+                     "        ...\n"
+                     "      </actuators>\n"
+                     "      ...\n"
+                     "    </my_controller>\n"
+                     "    ...\n"
+                     "  </controllers>\n\n",
+                   "Usable"
+		  );
 
 }

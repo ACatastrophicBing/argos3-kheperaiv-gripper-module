@@ -29,14 +29,14 @@ namespace argos {
 
       CKheperaIVGripperForceSensor();
 
-      virtual ~CKheperaIVGripperForceSensor() {}
+      virtual ~CKheperaIVGripperForceSensor();
 
       virtual void SetRobot(CComposableEntity& c_entity);
 
       virtual void Init(TConfigurationNode& t_tree);
 
       virtual void Update();
-      
+
       virtual void Reset();
 
    private:

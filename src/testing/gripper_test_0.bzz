@@ -2,7 +2,7 @@ MAX_SPEED = 10.0
 MIN_SPEED = -MAX_SPEED
 
 function set_wheels_debug(Left, Right){
-	log(id, " speeds: ", Left, " " , Right)
+	#log(id, " speeds: ", Left, " " , Right)
 	set_wheels(Left, Right)
 	#debug.print("i: ", L_increase, " ", R_increase, "; s: ", Left, " ", Right, "; a: ", AngleToGoal)
 }
@@ -21,21 +21,8 @@ function init() {
 # This function is executed at each time step
 # The main loop is controller by ARGoS
 function step() {
-	if(flipper < 50){
-		set_wheels_debug(-5.0,5.0)
-		turret_set(3.1415)
-		gripper_lock()
-	} 
-	else{
-		set_wheels_debug(5.0,-5.0)
-		turret_set(0.0)
-		gripper_unlock()
-	}
+	set_wheels_debug(-5.0,-5.0)
 	
-	flipper = flipper + 1
-	if(flipper > 100){
-		flipper = 0
-	}
 }
 
 

@@ -33,6 +33,21 @@ namespace argos {
   /****************************************/
   /****************************************/
 
+#ifdef ARGOS_WITH_LUA
+   void CCI_KheperaIVGripperForceSensor::CreateLuaState(lua_State* pt_lua_state) {
+      // 
+   }
+#endif
+
+   /****************************************/
+   /****************************************/
+
+#ifdef ARGOS_WITH_LUA
+   void CCI_KheperaIVGripperForceSensor::ReadingsToLuaState(lua_State* pt_lua_state) {
+      // 
+   }
+#endif
+
   /****************************************/
   /****************************************/
 
