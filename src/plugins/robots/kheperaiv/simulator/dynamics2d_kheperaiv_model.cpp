@@ -184,7 +184,7 @@ namespace argos {
          TurretActiveToPassive();
       }
       
-      // printf("Everything should be all set up now\n");
+      printf("KheperaIV should be all set up now\n");
    }
 
    /****************************************/
@@ -245,7 +245,7 @@ namespace argos {
          GetEmbodiedEntity().DisableAnchor("turret");
       }
       /* Reset the rest */
-      CDynamics2DMultiBodyObjectModel::Reset();
+      CDynamics2DMultiBodyObjectModel::Reset(); // TODO Error Happening Here
    }
 
    /****************************************/
@@ -258,24 +258,44 @@ namespace argos {
       GetBoundingBox().MaxCorner.SetX(m_ptBaseShape->bb.r);
       GetBoundingBox().MaxCorner.SetY(m_ptBaseShape->bb.t);
       GetBoundingBox().MaxCorner.SetZ(GetDynamics2DEngine().GetElevation() + KHEPERAIV_BASE_TOP);
+      // if(turretEnabled){
+      //    GetBoundingBox().MinCorner.SetX(ptGripperShape->bb.l);
+      //    GetBoundingBox().MinCorner.SetY(ptGripperShape->bb.b);
+      //    GetBoundingBox().MinCorner.SetZ(GetDynamics2DEngine().GetElevation());
+      //    GetBoundingBox().MaxCorner.SetX(ptGripperShape->bb.r);
+      //    GetBoundingBox().MaxCorner.SetY(ptGripperShape->bb.t);
+      //    GetBoundingBox().MaxCorner.SetZ(GetDynamics2DEngine().GetElevation() + KHEPERAIV_BASE_TOP);
+      // }
    }
 
    /****************************************/
    /****************************************/
 
    void CDynamics2DKheperaIVModel::UpdateEntityStatus(){
-      m_cGripperEntity.SetExtension(m_pcGripper->GetExtension());
-      cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
-      m_cGripperEntity.SetAnchor1(CVector3(ptSpring->anchr1.x,ptSpring->anchr1.y,0.0));
-      m_cGripperEntity.SetAnchor2(CVector3(ptSpring->anchr2.x,ptSpring->anchr2.y,0.0));
-      m_cGripperEntity.SetOriginAnchorRob(GetEmbodiedEntity().GetOriginAnchor().Position);
-      
-      CVector3 gripper_anchr = m_cGripperEntity.GetAnchor1();
-      CVector3 grippee_anchr = m_cGripperEntity.GetAnchor2();
-      CVector3 robot_anchor = m_cGripperEntity.GetOriginAnchorRob();
-      CVector3 vector_attachment = gripper_anchr - grippee_anchr;
-      CVector3 vector_grip_direction = gripper_anchr - robot_anchor;
-      CRadians vector_direction = vector_grip_direction.GetAngleWith(vector_attachment);
+      CDynamics2DMultiBodyObjectModel::UpdateEntityStatus(); // NOTE : Needed in a multi body model
+      m_dTick += 1;
+      // printf("Iteration %d\n", m_dTick);
+      if(m_cGripperEntity.IsLocked()){
+         // printf("Updating Entity Status\n");
+         cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
+         CVector3 robot_anchor = GetEmbodiedEntity().GetOriginAnchor().Position;
+         CVector3 Anchr1 = CVector3(ptSpring->anchr1.x,ptSpring->anchr1.y,0.0);
+         CVector3 Anchr2 = CVector3(ptSpring->anchr2.x,ptSpring->anchr2.y,0.0);
+         // printf("Robot anchor %f %f, Gripper Anchor %f %f", Anchr1.GetX(), Anchr1.GetY(), Anchr2.GetX(), Anchr2.GetY());
+         cpConstraint* impulse = &ptSpring->constraint;
+
+         cpBody *a = ptSpring->constraint.a;
+	      cpBody *b = ptSpring->constraint.b;
+         cpVect delta = cpvsub(cpvadd(b->p, ptSpring->r2), cpvadd(a->p, ptSpring->r1));
+	      cpFloat dist = cpvlength(delta);
+         Real f_spring = ptSpring->springForceFunc((cpConstraint *)ptSpring, dist);
+
+         m_cGripperEntity.SetForceMag(f_spring);
+         delta = cpvmult(delta, f_spring);
+         m_cGripperEntity.SetForceSensor(CVector2(delta.x, delta.y));
+         printf("Math completed, force Vector = %f, %f, %f \n", delta.x, delta.y, f_spring);
+      }
+      // printf("Iteration %d Completed\n", m_dTick);
    }
 
    /****************************************/
@@ -283,6 +303,7 @@ namespace argos {
 
    void CDynamics2DKheperaIVModel::UpdateFromEntityStatus() {
       /* Do we want to move? */
+      // printf("Updating From Entity Status\n");
       if((m_fCurrentWheelVelocity[KHEPERAIV_LEFT_WHEEL] != 0.0f) ||
          (m_fCurrentWheelVelocity[KHEPERAIV_RIGHT_WHEEL] != 0.0f)) {
          m_cDiffSteering.SetWheelVelocity(m_fCurrentWheelVelocity[KHEPERAIV_LEFT_WHEEL],
@@ -363,6 +384,7 @@ namespace argos {
             }
             break;
       }
+      // printf("Succesfully Updated\n");
    }
 
    /****************************************/

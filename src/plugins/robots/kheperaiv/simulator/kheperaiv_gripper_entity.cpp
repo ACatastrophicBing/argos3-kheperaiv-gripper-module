@@ -43,18 +43,21 @@ namespace argos {
    /****************************************/
 
    void CKheperaIVGripperEntity::Reset() {
-      m_fExtension = 0.0;
-      m_cAnchor1 = CVector3::ZERO;
-      m_cAnchor2 = CVector3::ZERO;
+      CGripperEquippedEntity::Reset();
+      // printf("Reseting the Gripper Entity\n");
+      m_cForceVector = CVector2(0.0,0.0);
+      m_fForceMag = 0;
+      // printf("Gripper Entity Reset\n");
    }
 
    /****************************************/
    /****************************************/
 
    void CKheperaIVGripperEntity::Destroy() {
-      m_fExtension = 0.0;
-      m_cAnchor1 = CVector3::ZERO;
-      m_cAnchor2 = CVector3::ZERO;
+      printf("Destroying the Gripper Entity\n");
+      m_cForceVector = CVector2(0.0,0.0);
+      m_fForceMag = 0;
+      printf("Gripper Entity Destroyed\n");
    }
 
    /****************************************/
@@ -65,44 +68,20 @@ namespace argos {
       // All updating is done manually through the Set functions
    }
 
-   void CKheperaIVGripperEntity::SetExtension(Real f_extension){
-      m_fExtension = f_extension;
+   void CKheperaIVGripperEntity::SetForceMag(Real f_ForceMag){
+      m_fForceMag = f_ForceMag;
    }
 
-   void CKheperaIVGripperEntity::SetAnchor1(CVector3 c_Anchor1){
-      m_cAnchor1 = c_Anchor1;
+   void CKheperaIVGripperEntity::SetForceSensor(CVector2 c_ForceVector){
+      m_cForceVector = c_ForceVector;
    }
 
-   void CKheperaIVGripperEntity::SetAnchor2(CVector3 c_Anchor2){
-      m_cAnchor2 = c_Anchor2;
+   CVector2 CKheperaIVGripperEntity::GetForceSensor(){
+      return m_cForceVector * m_fForceMag;
    }
 
-   void CKheperaIVGripperEntity::SetOriginAnchorRob(CVector3 c_AnchorOrigin){
-      m_cOriginAnchor = c_AnchorOrigin;
-   }
-
-   void CKheperaIVGripperEntity::SetForceSensor(CVector3 c_Anchor){
-      m_cForceVector = c_Anchor;
-   }
-
-   CVector3 CKheperaIVGripperEntity::GetAnchor1(){
-      return m_cAnchor1;
-   }
-
-   CVector3 CKheperaIVGripperEntity::GetAnchor2(){
-      return m_cAnchor2;
-   }
-
-   CVector3 CKheperaIVGripperEntity::GetOriginAnchorRob(){
-      return m_cOriginAnchor;
-   }
-
-   CVector3 CKheperaIVGripperEntity::GetForceSensor(){
-      return m_cForceVector;
-   }
-
-   Real CKheperaIVGripperEntity::GetExtension(){
-      return m_fExtension;
+   Real CKheperaIVGripperEntity::GetForceMag(){
+      return m_fForceMag;
    }
 
    /****************************************/

@@ -35,33 +35,21 @@ namespace argos {
 
       virtual void Update();
 
-      void SetExtension(Real f_extension);
+      void SetForceMag(Real f_ForceMag);
 
-      void SetAnchor1(CVector3 c_Anchor1);
+      void SetForceSensor(CVector2 c_ForceVector);
 
-      void SetAnchor2(CVector3 c_Anchor2);
+      CVector2 GetForceSensor();
 
-      void SetOriginAnchorRob(CVector3 c_AnchorOrigin);
-
-      void SetForceSensor(CVector3 c_Anchor);
-
-      CVector3 GetAnchor1();
-
-      CVector3 GetAnchor2();
-
-      CVector3 GetOriginAnchorRob();
-
-      CVector3 GetForceSensor();
-
-      Real GetExtension();
+      Real GetForceMag();
 
    private:
    
-      CVector3 m_cAnchor1;
-      CVector3 m_cAnchor2;
-      CVector3 m_cOriginAnchor;
-      CVector3 m_cForceVector;
-      Real     m_fExtension;
+      CVector3 m_cAnchor1 = CVector3(0.0,0.0,0.0);
+      CVector3 m_cAnchor2 = CVector3(0.0,0.0,0.0);
+      CVector3 m_cOriginAnchor = CVector3(0.0,0.0,0.0);
+      CVector2 m_cForceVector = CVector2(0.0,0.0);
+      Real     m_fForceMag = 0;
 
    };
 

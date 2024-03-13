@@ -368,8 +368,10 @@ namespace argos {
    void CKheperaIVEntity::Reset() {
       /* Reset all components */
       CComposableEntity::Reset();
+      // printf("All composable entities reset\n");
       /* Update components */
       UpdateComponents();
+      // printf("Components updated\n");
    }
 
    /****************************************/

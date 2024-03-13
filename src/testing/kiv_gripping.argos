@@ -106,13 +106,13 @@ $ argos3 -q box
     
     
     <kheperaiv id="kiv_0" rab_data_size="100">
-      <body position="0,0,0" orientation="0,0,0" />
+      <body position="-0.1850,0,0" orientation="0,0,0" />
       <controller config="sync" />
     </kheperaiv>
     
     
     <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
-      <body position="0.1850,0,0" orientation="0,0,0" />
+      <body position="0,0,0" orientation="0,0,0" />
     </cylinder>
     
     

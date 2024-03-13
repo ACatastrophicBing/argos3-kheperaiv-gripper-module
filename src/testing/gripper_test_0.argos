@@ -31,6 +31,7 @@
                              show_rays="true" noise_std_dev="0" />
         <positioning         implementation="default" />
         <kheperaiv_turret_encoder      implementation="default" />
+        <kheperaiv_gripper_force implementation="default"/>
       </sensors>
       <params bytecode_file="gripper_test_0.bo" debug_file="gripper_test_0.bdb"/>
     </buzz_controller_kheperaiv>

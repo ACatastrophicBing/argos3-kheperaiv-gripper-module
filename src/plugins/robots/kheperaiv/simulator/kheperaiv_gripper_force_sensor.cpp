@@ -44,47 +44,7 @@ namespace argos {
    /****************************************/
 
    void CKheperaIVGripperForceSensor::Update() {
-      Real m_fExtension = m_pcGripperEquippedEntity->GetExtension(); // Gets the extension, probably don't need this
-      //should be a normalized force but if it isn't, fix it peasant
-      // Now get the location of the center of the robot
-      // Get the location of the anchor point of the gripper
-      // Get the location of the anchor point of the gripped object
-      // Find the vector of gripper to gripped object with respect to center to gripper
-      // Multiply vector by extension and set m_fPerpendicularForce m_fParallelForce m_cForceVector properly
-      // m_pcGripperEquippedEntity->m_pcGrippee(); // Calculates anchor point on grippable body
-      // cpConstraint* constraint = m_pcGripperEquippedEntity->GetConstraint(); // Gets the constraint
-      // cpVect gripper_anchr = constraint->anchr1;
-      // cpVect grippee_anchr = constraint->anchr2;
-      CVector3 gripper_anchr = m_pcGripperEquippedEntity->GetAnchor1();
-      CVector3 grippee_anchr = m_pcGripperEquippedEntity->GetAnchor2();
-      CVector3 robot_anchor = m_pcGripperEquippedEntity->GetOriginAnchorRob();
-      CVector3 vector_attachment = gripper_anchr - grippee_anchr;
-      CVector3 vector_grip_direction = gripper_anchr - robot_anchor;
-      CRadians vector_direction = vector_grip_direction.GetAngleWith(vector_attachment);
-      m_cForceVector = CVector2(vector_attachment.Length(), vector_direction);
-      // m_pcGripperEquippedEntity
-
-
-
-
-      /*
-      struct cpDampedSpring {
-         cpConstraint constraint;
-         cpVect anchr1, anchr2;
-         cpFloat restLength;
-         cpFloat stiffness;
-         cpFloat damping;
-         cpDampedSpringForceFunc springForceFunc;
-         
-         cpFloat target_vrn;
-         cpFloat v_coef;
-         
-         cpVect r1, r2;
-         cpFloat nMass;
-         cpVect n;
-      };
-      */
-
+      m_cForceVector = m_pcGripperEquippedEntity->GetForceSensor();
    }
 
    /****************************************/

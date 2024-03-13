@@ -82,6 +82,7 @@ namespace argos {
       cpConstraint* m_ptGripperControlAngularMotion;
       cpConstraint* m_ptBaseGripperLinearMotion;
       cpConstraint* m_ptBaseGripperAngularMotion;
+      int m_dTick = 0;
 
       const Real* m_fCurrentWheelVelocity;
 
