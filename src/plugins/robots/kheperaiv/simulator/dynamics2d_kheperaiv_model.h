@@ -76,6 +76,7 @@ namespace argos {
 
       cpFloat  m_fMass;
       cpShape* m_ptBaseShape;
+      cpShape* m_ptGripperShape;
       cpBody*  m_ptActualBaseBody;
       cpBody*  m_ptActualGripperBody;
       cpBody*  m_ptControlGripperBody;

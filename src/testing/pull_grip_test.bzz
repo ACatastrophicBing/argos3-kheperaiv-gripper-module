@@ -18,18 +18,16 @@ function init() {
     gripped = 0
     failure = 0
     turret_enable()
+    gripper_lock()
 }
 
 # This function is executed at each time step
 # The main loop is controller by ARGoS
 function step() {
-gripper_lock()
-  if(gripped == 0){
   log("Going Backwards")
   L_wheel = 5.0
   R_wheel = 5.0
   set_wheels_debug(L_wheel, R_wheel)
-}
 }
 
 
