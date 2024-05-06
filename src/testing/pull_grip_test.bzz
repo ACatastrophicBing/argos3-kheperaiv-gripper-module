@@ -18,29 +18,16 @@ function init() {
     gripped = 0
     failure = 0
     turret_enable()
+    gripper_lock()
 }
 
 # This function is executed at each time step
 # The main loop is controller by ARGoS
 function step() {
-  if(gripped == 0){
-#			if (proximity[3].value > 0.6){
-	#      set_wheels_debug(0.0, 0.0)
-	 #     L_wheel = 0.0
-	  #    R_wheel = 0.0
-     #	  gripped = 1
- 	      gripper_lock()
-				log("Gripped Object")
-     #   set_wheels_debug(L_wheel, R_wheel)
-		#		right_steps = 10
-				gripped = 1
-    	} else {
-				log("Going Backwards")
-     	  L_wheel = 5.0
-      	R_wheel = 5.0
-        set_wheels_debug(L_wheel, R_wheel)
-		#}
-	}
+  log("Going Backwards")
+  L_wheel = 5.0
+  R_wheel = 5.0
+  set_wheels_debug(L_wheel, R_wheel)
 }
 
 

@@ -36,17 +36,16 @@
     <buzz_controller_kheperaiv id="sync">
       <actuators>
         <differential_steering implementation="default" />
-        <leds                  implementation="default" medium="leds" />
         <range_and_bearing     implementation="default" />
         <kheperaiv_gripper     implementation="default" show_rays="true" />
         <kheperaiv_turret      implementation="default" />
       </actuators>
       
       <sensors>
-        <kheperaiv_proximity implementation="default" />
         <range_and_bearing   implementation="medium" medium="rab"
                              show_rays="true" noise_std_dev="0" />
         <positioning         implementation="default" />
+        <kheperaiv_gripper_force implementation="default" />
       </sensors>
       
       <params bytecode_file="pull_grip_test.bo" debug_file="pull_grip_test.bdb">
@@ -105,13 +104,18 @@ $ argos3 -q box
     
     
     <kheperaiv id="kiv_0" rab_data_size="100">
-      <body position="0,0,0" orientation="0,0,0" />
+      <body position="-0.1850,0,0" orientation="0,0,0" />
+      <controller config="sync" />
+    </kheperaiv>
+    
+    <kheperaiv id="kiv_1" rab_data_size="100">
+      <body position="0,0.1850,0" orientation="-90,0,0" />
       <controller config="sync" />
     </kheperaiv>
     
     
     <cylinder id="c" height="0.2" radius="0.1" mass="0.1" movable="true">
-      <body position="0.1850,0,0" orientation="0,0,0" />
+      <body position="0,0,0" orientation="0,0,0" />
     </cylinder>
     
     

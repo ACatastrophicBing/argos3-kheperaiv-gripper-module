@@ -11,8 +11,9 @@ namespace argos {
    class CBatteryEquippedEntity;
    class CControllableEntity;
    class CEmbodiedEntity;
-   class CGripperEquippedEntity;
    class CGroundSensorEquippedEntity;
+   class CKheperaIVGripperEntity;
+   // class CGripperEquippedEntity;
    class CKheperaIVEntity;
    class CKheperaIVTurretEntity;
    class CLEDEquippedEntity;
@@ -62,8 +63,8 @@ namespace argos {
          return *m_pcEmbodiedEntity;
       }
 
-      inline CGripperEquippedEntity& GetGripperEquippedEntity() {
-         return *m_pcGripperEquippedEntity;
+      inline CKheperaIVGripperEntity& GetGripperEquippedEntity() {
+         return *m_pcKheperaIVGripperEquippedEntity;
       }
 
       inline CGroundSensorEquippedEntity& GetGroundSensorEquippedEntity() {
@@ -115,8 +116,9 @@ namespace argos {
       CBatteryEquippedEntity*         m_pcBatteryEquippedEntity;
       CControllableEntity*            m_pcControllableEntity;
       CEmbodiedEntity*                m_pcEmbodiedEntity;
-      CGripperEquippedEntity*         m_pcGripperEquippedEntity;
       CGroundSensorEquippedEntity*    m_pcGroundSensorEquippedEntity;
+      CKheperaIVGripperEntity*        m_pcKheperaIVGripperEquippedEntity;
+      // CGripperEquippedEntity*         m_pcGripperEquippedEntity;
       CKheperaIVTurretEntity*         m_pcKheperaIVTurretEntity;
       CLEDEquippedEntity*             m_pcLEDEquippedEntity;
       CLightSensorEquippedEntity*     m_pcLightSensorEquippedEntity;

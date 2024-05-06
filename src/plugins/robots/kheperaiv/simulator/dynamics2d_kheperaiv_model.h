@@ -16,6 +16,7 @@ namespace argos {
 #include <argos3/plugins/simulator/physics_engines/dynamics2d/dynamics2d_multi_body_object_model.h>
 #include <argos3/plugins/simulator/physics_engines/dynamics2d/dynamics2d_differentialsteering_control.h>
 #include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_entity.h>
+#include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_gripper_entity.h>
 
 namespace argos {
 
@@ -36,6 +37,8 @@ namespace argos {
 
       virtual void UpdateFromEntityStatus();
 
+      virtual void UpdateEntityStatus();
+
       void UpdateOriginAnchor(SAnchor& s_anchor);
 
       void UpdateTurretAnchor(SAnchor& s_anchor);
@@ -55,6 +58,8 @@ namespace argos {
       inline const cpBody* GetActualGripperBody() const {
          return m_ptActualGripperBody;
       }
+      
+      CDynamics2DDifferentialSteeringControl m_cDiffSteering;
 
    private:
 
@@ -65,20 +70,21 @@ namespace argos {
 
       CKheperaIVEntity&         m_CKheperaIVEntity;
       CWheeledEntity&         m_cWheeledEntity;
-      CGripperEquippedEntity& m_cGripperEntity;
+      CKheperaIVGripperEntity& m_cGripperEntity;
 
-      CDynamics2DDifferentialSteeringControl m_cDiffSteering;
       CDynamics2DGripper*                    m_pcGripper;
       CDynamics2DGrippable*                  m_pcGrippable;
 
       cpFloat  m_fMass;
       cpShape* m_ptBaseShape;
+      cpShape* m_ptGripperShape;
       cpBody*  m_ptActualBaseBody;
       cpBody*  m_ptActualGripperBody;
       cpBody*  m_ptControlGripperBody;
       cpConstraint* m_ptGripperControlAngularMotion;
       cpConstraint* m_ptBaseGripperLinearMotion;
       cpConstraint* m_ptBaseGripperAngularMotion;
+      int m_dTick = 0;
 
       const Real* m_fCurrentWheelVelocity;
 

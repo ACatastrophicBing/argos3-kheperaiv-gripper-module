@@ -11,6 +11,7 @@
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_lidar_sensor.h>
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_gripper_actuator.h>
 #include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_turret_actuator.h>
+#include <argos3/plugins/robots/kheperaiv/control_interface/ci_kheperaiv_gripper_force_sensor.h>
 
 
 using namespace argos;
@@ -61,6 +62,7 @@ public:
    void TurretEnable();
    void TurretDisable();
    void TurretSet(Real f_rotation);
+   void GetForceSensor();
 
 private:
 
@@ -72,9 +74,11 @@ protected:
    CCI_DifferentialSteeringActuator* m_pcWheels;
    /* Pointer to the LEDs actuator */
    CCI_LEDsActuator* m_pcLEDs;
-   /* Pointer to the foot-bot gripper actuator */
+   /* Pointer to the kheperaiv gripper actuator */
    CCI_KheperaIVGripperActuator* m_pcGripper;
-   /* Pointer to the foot-bot turret actuator */
+   /* Pointer to the kheperaiv force sensor*/
+   CCI_KheperaIVGripperForceSensor* m_pcForce;
+   /* Pointer to the kheperaiv turret actuator */
    CCI_KheperaIVTurretActuator* m_pcTurret;
    /* Pointer to the ground sensor */
    CCI_KheperaIVGroundSensor* m_pcGround;

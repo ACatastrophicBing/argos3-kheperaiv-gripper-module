@@ -2,7 +2,7 @@ MAX_SPEED = 10.0
 MIN_SPEED = -MAX_SPEED
 
 function set_wheels_debug(Left, Right){
-	#log(id, " speeds: ", Left, " " , Right)
+	log(id, " speeds: ", Left, " " , Right)
 	set_wheels(Left, Right)
 	#debug.print("i: ", L_increase, " ", R_increase, "; s: ", Left, " ", Right, "; a: ", AngleToGoal)
 }
@@ -15,14 +15,24 @@ function init() {
 	turret_enable()
 	log("Closing Gripper")
 	gripper_lock()
-	flipper = 0
+	wheel_speed = 0.0
+	lock = 0
 }
 
 # This function is executed at each time step
 # The main loop is controller by ARGoS
 function step() {
-	set_wheels_debug(-5.0,-5.0)
-	
+	if(wheel_speed < 10 and lock == 0){
+		set_wheels_debug(wheel_speed, -wheel_speed)
+		wheel_speed = wheel_speed + 0.1
+	} else {
+		lock = 1
+		set_wheels_debug(wheel_speed, -wheel_speed)
+		wheel_speed = wheel_speed - 0.1
+		if(wheel_speed < -10){
+			lock = 0
+		}
+	}
 }
 
 
@@ -30,6 +40,7 @@ function step() {
 function reset() {
 	turret_set(0.0)
 	gripper_unlock()
+	set_wheels_debug(0.0,0.0)
 }
 
 # This function is executed once when you close the simulator

@@ -47,7 +47,7 @@ namespace argos {
 
 REGISTER_ACTUATOR(CKheperaIVGripperDefaultActuator,
                   "kheperaiv_gripper", "default",
-                  "Carlo Pinciroli [ilpincy@gmail.com]",
+                  "Chandler Garcia [crgarcia@wpi.edu]",
                   "1.0",
                   "The kheperaiv gripper actuator.",
                   "This actuator controls the kheperaiv gripper. For a complete description of its\n"

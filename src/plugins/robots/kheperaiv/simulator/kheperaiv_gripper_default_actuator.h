@@ -1,7 +1,7 @@
 /**
  * @file <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_gripper_default_actuator.h>
  *
- * @author Chandler Garcia & Yasmine Aoua
+ * @author Chandler Garcia
  */
 
 #ifndef KHEPERAIV_GRIPPER_DEFAULT_ACTUATOR_H

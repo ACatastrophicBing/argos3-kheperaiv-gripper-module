@@ -282,6 +282,10 @@ void CBuzzControllerKheperaIV::Init(TConfigurationNode& t_node) {
       }
       catch(CARGoSException& ex) {}
       try { 
+         m_pcForce = GetActuator<CCI_KheperaIVGripperForceSensor>("kheperaiv_gripper_force"); 
+      }
+      catch(CARGoSException& ex) {}
+      try { 
          m_pcTurret = GetActuator<CCI_KheperaIVTurretActuator>("kheperaiv_turret"); 
       }
       catch(CARGoSException& ex) {}
@@ -442,6 +446,21 @@ void CBuzzControllerKheperaIV::UpdateSensors() {
          /* Store i-th read in the lidar table */
          TablePut(tLTable, i, static_cast<SInt32>(m_pcLIDAR->GetReading(i)));
       }
+   }
+
+   if(m_pcForce != NULL) {
+      /* Create empty force vector table */
+      buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "force", 1));
+      buzzvm_pusht(m_tBuzzVM);
+      buzzobj_t tForceTable = buzzvm_stack_at(m_tBuzzVM, 1);
+      buzzvm_gstore(m_tBuzzVM);
+      /* Get force sensor readings */
+      CVector2 cForceReading = m_pcForce->GetReadings();
+      /* Fill into the force sensor table */
+      // Parallel
+      TablePut(tForceTable, "angle", cForceReading.GetX());
+      // Perpendicular
+      TablePut(tForceTable, "angle", cForceReading.GetY());
    }
 }
 
