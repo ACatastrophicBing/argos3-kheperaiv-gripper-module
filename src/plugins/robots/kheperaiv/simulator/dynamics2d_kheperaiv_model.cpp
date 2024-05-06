@@ -280,9 +280,9 @@ namespace argos {
       if(m_cGripperEntity.IsGripping()){
          // printf("Updating Entity Status because robots are gripped successfully\n");
          cpDampedSpring* ptSpring = reinterpret_cast<cpDampedSpring*>(m_pcGripper->GetConstraint());
-         CVector3 robot_anchor = GetEmbodiedEntity().GetOriginAnchor().Position;
-         CVector3 Anchr1 = CVector3(ptSpring->anchr1.x,ptSpring->anchr1.y,0.0);
-         CVector3 Anchr2 = CVector3(ptSpring->anchr2.x,ptSpring->anchr2.y,0.0);
+         // CVector3 robot_anchor = GetEmbodiedEntity().GetOriginAnchor().Position;
+         // CVector3 Anchr1 = CVector3(ptSpring->anchr1.x,ptSpring->anchr1.y,0.0);
+         // CVector3 Anchr2 = CVector3(ptSpring->anchr2.x,ptSpring->anchr2.y,0.0);
          // printf("Robot anchor %f %f, Gripper Anchor %f %f", Anchr1.GetX(), Anchr1.GetY(), Anchr2.GetX(), Anchr2.GetY());
          cpConstraint* impulse = &ptSpring->constraint;
 
@@ -293,7 +293,7 @@ namespace argos {
          Real f_spring = ptSpring->springForceFunc((cpConstraint *)ptSpring, dist);
 
          m_cGripperEntity.SetForceMag(f_spring);
-         delta = cpvmult(delta, f_spring);
+         delta = cpvmult(delta, 1.0 / dist);
          m_cGripperEntity.SetForceSensor(CVector2(delta.x, delta.y));
          // printf("Math completed, force Vector = %f, %f, %f \n", delta.x, delta.y, f_spring);
       }

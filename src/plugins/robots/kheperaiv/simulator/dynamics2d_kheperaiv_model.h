@@ -58,6 +58,8 @@ namespace argos {
       inline const cpBody* GetActualGripperBody() const {
          return m_ptActualGripperBody;
       }
+      
+      CDynamics2DDifferentialSteeringControl m_cDiffSteering;
 
    private:
 
@@ -70,7 +72,6 @@ namespace argos {
       CWheeledEntity&         m_cWheeledEntity;
       CKheperaIVGripperEntity& m_cGripperEntity;
 
-      CDynamics2DDifferentialSteeringControl m_cDiffSteering;
       CDynamics2DGripper*                    m_pcGripper;
       CDynamics2DGrippable*                  m_pcGrippable;
 
